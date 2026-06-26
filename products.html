@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+script-src 'self' 'unsafe-inline'; 
+style-src 'self' https://fonts.googleapis.com; 
+font-src 'self' https://fonts.gstatic.com; 
+img-src 'self' data: https://images.unsplash.com; 
+connect-src 'self'; frame-ancestors 'none';">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Products — A.C.P Air Compressor Products</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="utility-bar">
+  <div class="wrap">
+    <span class="util-left">🌍 Shipping Worldwide — Dispatch within 24 hrs</span>
+    <div class="util-right">
+      <a href="tel:+918881780590">📞 +91 88817 80590</a>
+      <a href="mailto:air_compressorproducts@yahoo.com">✉ air_compressorproducts@yahoo.com</a>
+    </div>
+  </div>
+</div>
+
+<header class="main-header">
+  <div class="header-inner wrap">
+    <a href="index.html" class="logo-block">
+      <svg class="logo-svg" viewBox="0 0 44 44" fill="none">
+        <circle cx="15" cy="17" r="9" stroke="#009D9A" stroke-width="2.5"/>
+        <circle cx="15" cy="17" r="3.2" fill="#009D9A"/>
+        <circle cx="27" cy="10" r="5.5" stroke="#555" stroke-width="2"/>
+        <circle cx="27" cy="10" r="1.8" fill="#555"/>
+        <circle cx="28" cy="25" r="6" stroke="#444" stroke-width="2"/>
+        <circle cx="28" cy="25" r="2" fill="#444"/>
+      </svg>
+      <span class="logo-text">
+        <span class="top">A.C.P</span>
+        <span class="sub">Air Compressor Products</span>
+      </span>
+    </a>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Enter Keyword or Part Number" maxlength="120" autocomplete="off">
+      <button id="searchBtn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+    </div>
+    <div class="header-call"><span>Call Us</span><strong>+91 88817 80590</strong></div>
+    <a href="cart.html" class="cart-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.97-1.67L23 6H6"/></svg>
+      Cart <span class="cart-count" style="display:none;">0</span>
+    </a>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <div class="nav-inner wrap">
+    <div id="navLinks" class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="products.html?sector=Industrial+Compressors">Industrial Compressors</a>
+      <a href="products.html?sector=Tunneling">Tunneling</a>
+      <a href="products.html?sector=Mining">Mining</a>
+      <a href="products.html?sector=Construction+Equipment">Construction Equipment</a>
+      <a href="products.html?sector=EOT+Cranes">EOT Cranes</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <span class="nav-phone">Call: <strong>+91 83070 28111</strong></span>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="page-title-bar">
+  <div class="wrap">
+    <h1>All Products</h1>
+    <div class="breadcrumb"><a href="index.html">Home</a> / Products</div>
+  </div>
+</div>
+
+<div class="wrap products-layout">
+
+  <!-- SIDEBAR FILTERS -->
+  <aside class="filter-sidebar">
+    <h3>Filter Products</h3>
+
+    <div class="filter-group">
+      <label>Brand</label>
+      <div id="brandFilters"></div>
+    </div>
+
+    <div class="filter-group">
+      <label>Category</label>
+      <div id="catFilters"></div>
+    </div>
+
+    <div class="filter-group">
+      <label>Sector</label>
+      <div id="sectorFilters"></div>
+    </div>
+
+    <button class="btn btn-teal btn-sm" onclick="clearFilters()" style="width:100%;justify-content:center;margin-top:8px;">Clear Filters</button>
+  </aside>
+
+  <!-- PRODUCTS MAIN -->
+  <div class="products-main">
+    <div class="products-toolbar">
+      <span class="products-count" id="productsCount"></span>
+      <select class="sort-select" id="sortSelect">
+        <option value="default">Sort: Default</option>
+        <option value="az">Name: A–Z</option>
+        <option value="za">Name: Z–A</option>
+        <option value="brand">Sort by Brand</option>
+      </select>
+    </div>
+    <div class="product-grid" id="productsGrid"></div>
+    <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--muted);">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 16px;display:block"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <h3 style="margin-bottom:8px;">No products found</h3>
+      <p>Try a different search term or <button onclick="clearFilters()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:inherit;font-weight:600;">clear filters</button></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <div class="foot-logo">A<span>.</span>C<span>.</span>P</div>
+        <p class="foot-tagline">Sales, Service &amp; Spare Parts — shipped worldwide.</p>
+      </div>
+      <div class="foot-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="contact.html">Contact</a></div>
+      <div class="foot-col"><h4>Services</h4><p>Compressor Sales</p><p>Genuine Spare Parts</p><p>Maintenance &amp; AMC</p><p>Support &amp; Inquiry</p></div>
+      <div class="foot-col"><h4>Contact</h4><p>+91 88817 80590</p><p>air_compressorproducts@yahoo.com</p><p>Rampur, U.P. 244901</p></div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="year"></span> Air Compressor Products. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+<div id="toast"></div>
+
+<script src="products-data.js"></script>
+<script src="main.js"></script>
+  <script>
+  let activeFilters = { brands: new Set(), cats: new Set(), sectors: new Set() };
+  let searchQuery = '';
+
+  function getURLParams() {
+    const p = new URLSearchParams(window.location.search);
+    const q = p.get('q');
+    const b = p.get('brand');
+    const c = p.get('cat');
+    const s = p.get('sector');
+    if (q) searchQuery = q.slice(0, 120);
+    if (b) activeFilters.brands.add(b);
+    if (c) activeFilters.cats.add(c);
+    if (s) activeFilters.sectors.add(s);
+  }
+
+  function buildFilters() {
+    const bWrap = document.getElementById('brandFilters');
+    const cWrap = document.getElementById('catFilters');
+    const sWrap = document.getElementById('sectorFilters');
+
+    const SECTORS = ['Industrial Compressors','Tunneling','Mining','Construction Equipment','EOT Cranes'];
+
+    bWrap.innerHTML = BRANDS.map(b => `
+      <label class="filter-option">
+        <input type="checkbox" data-type="brand" value="${sanitize(b)}" ${activeFilters.brands.has(b) ? 'checked' : ''}>
+        ${sanitize(b)}
+      </label>`).join('');
+
+    cWrap.innerHTML = CATEGORIES.map(c => `
+      <label class="filter-option">
+        <input type="checkbox" data-type="cat" value="${sanitize(c)}" ${activeFilters.cats.has(c) ? 'checked' : ''}>
+        ${sanitize(c)}
+      </label>`).join('');
+
+    sWrap.innerHTML = SECTORS.map(s => `
+      <label class="filter-option">
+        <input type="checkbox" data-type="sector" value="${sanitize(s)}" ${activeFilters.sectors.has(s) ? 'checked' : ''}>
+        ${sanitize(s)}
+      </label>`).join('');
+
+    document.querySelectorAll('.filter-option input').forEach(chk => {
+      chk.addEventListener('change', () => {
+        if (chk.dataset.type === 'brand') {
+          chk.checked ? activeFilters.brands.add(chk.value) : activeFilters.brands.delete(chk.value);
+        } else if (chk.dataset.type === 'cat') {
+          chk.checked ? activeFilters.cats.add(chk.value) : activeFilters.cats.delete(chk.value);
+        } else if (chk.dataset.type === 'sector') {
+          chk.checked ? activeFilters.sectors.add(chk.value) : activeFilters.sectors.delete(chk.value);
+        }
+        renderProducts();
+      });
+    });
+  }
+
+  function clearFilters() {
+    activeFilters.brands.clear();
+    activeFilters.cats.clear();
+    activeFilters.sectors.clear();
+    searchQuery = '';
+    if (document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
+    buildFilters();
+    renderProducts();
+  }
+
+  function getFiltered() {
+    let list = [...PRODUCTS];
+    const q = searchQuery.toLowerCase();
+    if (q) list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.partNo.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q)
+    );
+    if (activeFilters.brands.size) list = list.filter(p => activeFilters.brands.has(p.brand));
+    if (activeFilters.cats.size) list = list.filter(p => activeFilters.cats.has(p.category));
+    if (activeFilters.sectors.size) list = list.filter(p => activeFilters.sectors.has(p.sector));
+    return list;
+  }
+
+  function getSorted(list) {
+    const s = document.getElementById('sortSelect').value;
+    if (s === 'az') return [...list].sort((a,b) => a.name.localeCompare(b.name));
+    if (s === 'za') return [...list].sort((a,b) => b.name.localeCompare(a.name));
+    if (s === 'brand') return [...list].sort((a,b) => a.brand.localeCompare(b.brand));
+    return list;
+  }
+
+  function renderProducts() {
+    const filtered = getSorted(getFiltered());
+    const grid = document.getElementById('productsGrid');
+    const noRes = document.getElementById('noResults');
+    document.getElementById('productsCount').textContent = filtered.length + ' product' + (filtered.length !== 1 ? 's' : '') + ' found';
+    if (filtered.length === 0) {
+      grid.innerHTML = '';
+      noRes.style.display = 'block';
+    } else {
+      noRes.style.display = 'none';
+      grid.innerHTML = filtered.map(productCardHTML).join('');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    getURLParams();
+    if (searchQuery && document.getElementById('searchInput')) {
+      document.getElementById('searchInput').value = searchQuery;
+    }
+    buildFilters();
+    renderProducts();
+    document.getElementById('sortSelect').addEventListener('change', renderProducts);
+  });
+</script>
+</body>
+</html>
