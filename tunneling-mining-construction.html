@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; frame-ancestors 'none';">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Tunneling, Mining & Construction — A.C.P</title>
+<meta name="description" content="Underground mining equipment spare parts, tunneling parts, construction equipment parts — LHD, LPDT, Drill Jumbo, engine parts, hydraulic parts, drifter parts. Shipped worldwide.">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ---- HERO ---- */
+  .tmc-hero {
+    background: #0d1a0a;
+    border-bottom: 4px solid #E8A33D;
+    padding: 56px 0 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tmc-hero::before {
+    content:'';position:absolute;left:-100px;top:-100px;
+    width:500px;height:500px;border-radius:50%;
+    background:radial-gradient(circle,rgba(232,163,61,0.1) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .tmc-hero::after {
+    content:'';position:absolute;right:-60px;bottom:-60px;
+    width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(0,157,154,0.08) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .tmc-hero-inner { position:relative;z-index:1; }
+  .tmc-badge {
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(232,163,61,0.15);border:1px solid rgba(232,163,61,0.35);
+    color:#E8A33D;font-size:11.5px;font-weight:700;letter-spacing:0.12em;
+    text-transform:uppercase;padding:6px 14px;border-radius:4px;margin-bottom:18px;
+  }
+  .tmc-hero h1 {
+    font-size:clamp(28px,4.5vw,48px);font-weight:800;
+    color:white;margin-bottom:14px;line-height:1.08;
+  }
+  .tmc-hero h1 em { color:#E8A33D;font-style:normal; }
+  .tmc-hero p { font-size:16px;color:#aaa;max-width:600px;margin-bottom:28px;line-height:1.6; }
+  .hero-cta-row { display:flex;gap:14px;flex-wrap:wrap; }
+  .btn-amber { background:#E8A33D;color:#0d1a0a;border:none; }
+  .btn-amber:hover { background:#f0b24a;transform:translateY(-2px); }
+  .tmc-stats {
+    display:flex;gap:0;flex-wrap:wrap;
+    margin-top:40px;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;overflow:hidden;
+    max-width:680px;
+  }
+  .tmc-stat {
+    flex:1;min-width:120px;
+    padding:18px 20px;
+    border-right:1px solid rgba(255,255,255,0.08);
+    text-align:center;
+  }
+  .tmc-stat:last-child { border-right:none; }
+  .tmc-stat .n { font-size:26px;font-weight:800;color:#E8A33D; }
+  .tmc-stat .l { font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px; }
+
+  /* ---- EQUIPMENT TABS ---- */
+  .equip-tabs {
+    background:var(--ink);
+    border-bottom:1px solid rgba(255,255,255,0.07);
+  }
+  .equip-tabs .wrap { display:flex;gap:0;overflow-x:auto; }
+  .etab {
+    padding:14px 20px;font-size:13.5px;font-weight:600;
+    color:#777;background:none;border:none;border-bottom:3px solid transparent;
+    cursor:pointer;white-space:nowrap;transition:color 0.15s,border-color 0.15s;
+  }
+  .etab:hover { color:#ccc; }
+  .etab.active { color:#E8A33D;border-bottom-color:#E8A33D; }
+
+  /* ---- WHAT WE SUPPLY ---- */
+  .supply-section { padding:52px 0;background:white; }
+  .supply-grid {
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;
+  }
+  .supply-intro h2 { font-size:clamp(22px,3vw,30px);margin-bottom:14px; }
+  .supply-intro p { color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:20px; }
+  .supply-list { display:flex;flex-direction:column;gap:12px; }
+  .supply-item {
+    display:flex;align-items:flex-start;gap:12px;
+    padding:14px 16px;
+    background:var(--bg);border-radius:8px;
+    border-left:3px solid #E8A33D;
+  }
+  .supply-item .si-icon { color:#E8A33D;flex-shrink:0;margin-top:2px; }
+  .supply-item h4 { font-size:14px;font-weight:700;margin-bottom:4px; }
+  .supply-item p { font-size:13px;color:var(--muted);margin:0; }
+
+  /* ---- EQUIPMENT CARDS ---- */
+  .equip-grid {
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    margin:28px 0;
+  }
+  .equip-card {
+    background:var(--ink);color:white;
+    border-radius:10px;overflow:hidden;
+    border:1px solid rgba(255,255,255,0.06);
+    transition:transform 0.15s,border-color 0.15s;
+    cursor:pointer;
+  }
+  .equip-card:hover { transform:translateY(-3px);border-color:#E8A33D; }
+  .equip-card-img {
+    height:130px;background:linear-gradient(135deg,#1a2a1a,#0d1a0d);
+    display:flex;align-items:center;justify-content:center;
+    color:#E8A33D;font-size:40px;
+  }
+  .equip-card-body { padding:14px; }
+  .equip-card-body h4 { font-size:14px;font-weight:700;margin-bottom:5px;color:white; }
+  .equip-card-body p { font-size:12px;color:#888;margin:0; }
+
+  /* ---- BRANDS PARTNERS ---- */
+  .partners-section {
+    background:var(--bg);padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  }
+  .partners-section h3 { font-size:14px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:22px; }
+  .partners-grid {
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+  }
+  .partner-pill {
+    background:white;border:1.5px solid var(--border);
+    border-radius:6px;padding:10px 18px;
+    font-size:13px;font-weight:700;color:var(--text);
+    white-space:nowrap;
+  }
+
+  /* ---- PRODUCTS SECTION ---- */
+  .products-section { padding:44px 0; }
+  .sub-tabs {
+    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;
+  }
+  .stab {
+    padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600;
+    border:1.5px solid var(--border);background:white;cursor:pointer;
+    transition:all 0.15s;color:var(--text);
+  }
+  .stab:hover { border-color:var(--ink);background:var(--ink);color:white; }
+  .stab.active { background:var(--ink);color:white;border-color:var(--ink); }
+
+  .page-toolbar {
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:20px;flex-wrap:wrap;gap:10px;
+  }
+  .page-count { font-size:14px;color:var(--muted); }
+
+  /* ---- QUOTE BANNER ---- */
+  .quote-banner {
+    background:linear-gradient(135deg,#0d1a0a,#1a2a0f);
+    border-radius:12px;padding:44px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:24px;flex-wrap:wrap;
+    border:1px solid rgba(232,163,61,0.2);
+    margin:44px 0;
+  }
+  .quote-banner h2 { font-size:clamp(20px,3vw,28px);color:white;margin-bottom:10px; }
+  .quote-banner p { color:#aaa;font-size:15px;max-width:500px; }
+
+  @media (max-width:768px) {
+    .supply-grid { grid-template-columns:1fr; }
+    .equip-grid { grid-template-columns:1fr 1fr; }
+    .quote-banner { flex-direction:column; }
+  }
+  @media (max-width:480px) {
+    .equip-grid { grid-template-columns:1fr 1fr; }
+    .tmc-stats { max-width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="wrap">
+    <span class="util-left">🌍 Shipping Worldwide — Dispatch within 24 hrs</span>
+    <div class="util-right">
+      <a href="tel:+918881780590">📞 +91 88817 80590</a>
+      <a href="mailto:air_compressorproducts@yahoo.com">✉ air_compressorproducts@yahoo.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="main-header">
+  <div class="header-inner wrap">
+    <a href="index.html" class="logo-block">
+      <img src="image/ACP.png" alt="ACP — Air Compressor Products" class="logo-img">
+    </a>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search by part name or number..." maxlength="120" autocomplete="off">
+      <button id="searchBtn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+    </div>
+    <div class="header-call"><span>Call Us</span><strong>+91 88817 80590</strong></div>
+    <a href="cart.html" class="cart-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.97-1.67L23 6H6"/></svg>
+      Cart <span class="cart-count" style="display:none;">0</span>
+    </a>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <div class="nav-inner wrap">
+    <div id="navLinks" class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="compressors.html">Industrial Compressors</a>
+      <a href="tunneling-mining-construction.html" class="active">Tunneling, Mining & Construction</a>
+      <a href="eot-cranes.html">EOT Cranes</a>
+      <a href="products.html">All Products</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <span class="nav-phone">Call: <strong>+91 83070 28111</strong></span>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="tmc-hero">
+  <div class="wrap tmc-hero-inner">
+    <div class="tmc-badge">
+      ⛏️ &nbsp; Underground Mining · Tunneling · Construction
+    </div>
+    <h1>Spare Parts for <em>Mining,</em><br>Tunneling & Construction Equipment</h1>
+    <p>Genuine OPM spare parts for underground and surface mining equipment — LHD, LPDT, Drill Jumbos and more. Engine, hydraulic, transmission, drifter and structural parts supplied across India and worldwide.</p>
+    <div class="hero-cta-row">
+      <a href="contact.html" class="btn btn-amber">Get a Free Quote</a>
+      <a href="tel:+918881780590" class="btn btn-outline">📞 Call Now</a>
+      <a href="#products" class="btn btn-ghost" style="border-color:rgba(255,255,255,0.2);color:white;">View All Parts ↓</a>
+    </div>
+    <div class="tmc-stats">
+      <div class="tmc-stat"><div class="n">3</div><div class="l">Sectors</div></div>
+      <div class="tmc-stat"><div class="n">25+</div><div class="l">Products</div></div>
+      <div class="tmc-stat"><div class="n">10+</div><div class="l">Brands</div></div>
+      <div class="tmc-stat"><div class="n">24hr</div><div class="l">Dispatch</div></div>
+      <div class="tmc-stat"><div class="n">WW</div><div class="l">Shipping</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT TYPE TABS -->
+<div class="equip-tabs">
+  <div class="wrap">
+    <button class="etab active" data-equip="all">All Equipment</button>
+    <button class="etab" data-equip="lhd">Load Haul Dumpers (LHD)</button>
+    <button class="etab" data-equip="lpdt">Low Profile Dump Trucks (LPDT)</button>
+    <button class="etab" data-equip="drill">Mining Drills & Jumbos</button>
+    <button class="etab" data-equip="loader">Mining Loaders</button>
+  </div>
+</div>
+
+<!-- EQUIPMENT CARDS -->
+<section style="background:var(--ink);padding:36px 0 28px;">
+  <div class="wrap">
+    <div class="equip-grid" id="equipGrid">
+      <div class="equip-card" data-equip="lhd">
+        <div class="equip-card-img">🚜</div>
+        <div class="equip-card-body">
+          <h4>Load Haul Dumpers</h4>
+          <p>LH307, LH410, EJC30SX and more — engine, hydraulic, axle parts</p>
+        </div>
+      </div>
+      <div class="equip-card" data-equip="lpdt">
+        <div class="equip-card-img">🚛</div>
+        <div class="equip-card-body">
+          <h4>Low Profile Dump Trucks</h4>
+          <p>LPDT dump box, frame parts, transmission and engine spares</p>
+        </div>
+      </div>
+      <div class="equip-card" data-equip="drill">
+        <div class="equip-card-img">⚙️</div>
+        <div class="equip-card-body">
+          <h4>Mining Drills & Jumbos</h4>
+          <p>Drifter parts HLX5, HL560, HL510, HL710 — feed, boom, rod parts</p>
+        </div>
+      </div>
+      <div class="equip-card" data-equip="loader">
+        <div class="equip-card-img">🏗️</div>
+        <div class="equip-card-body">
+          <h4>Mining Loaders</h4>
+          <p>Hydraulic pumps, axle parts, bucket blades and structural parts</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE SUPPLY -->
+<section class="supply-section">
+  <div class="wrap supply-grid">
+    <div class="supply-intro">
+      <div class="eyebrow" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#E8A33D;margin-bottom:12px;">
+        What We Supply
+      </div>
+      <h2>Genuine OPM Parts for Underground & Surface Equipment</h2>
+      <p>Our OPM (Original Part Manufacturer) parts are identical replacements to OEM parts — sourced directly from the component manufacturer. Same quality, same durability, significant savings. Suitable for LHD, LPDT, Drill Rigs and utility equipment.</p>
+      <p>We stock and fast-supply spare parts for various types of underground and surface loaders, trucks, drill rigs and utility equipment.</p>
+      <a href="contact.html" class="btn btn-amber" style="margin-top:8px;">Request Parts List</a>
+    </div>
+    <div class="supply-list">
+      <div class="supply-item">
+        <span class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></span>
+        <div>
+          <h4>Engine Parts</h4>
+          <p>Deutz, Cummins, Mercedes Benz — filters, gaskets, injectors, pistons, bearings</p>
+        </div>
+      </div>
+      <div class="supply-item">
+        <span class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
+        <div>
+          <h4>Hydraulic Pump Parts</h4>
+          <p>Rexroth, Sauer Danfoss — pumps, motors, valves, seals, hoses and fittings</p>
+        </div>
+      </div>
+      <div class="supply-item">
+        <span class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <div>
+          <h4>Axle, Torque Converter & Transmission</h4>
+          <p>Dana Spicer, Kessler — front & rear axle parts, torque converter kits</p>
+        </div>
+      </div>
+      <div class="supply-item">
+        <span class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></span>
+        <div>
+          <h4>Drifter Parts</h4>
+          <p>HLX5, HLX5T, HLX1, HL560, HL510, HL710 — high quality genuine drifter components</p>
+        </div>
+      </div>
+      <div class="supply-item">
+        <span class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+        <div>
+          <h4>Frame, Feed & Boom Parts</h4>
+          <p>Front & rear frame components, feed mechanisms, boom structural parts</p>
+        </div>
+      </div>
+      <div class="supply-item">
+        <span class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <div>
+          <h4>Mining Accessories</h4>
+          <p>Auto Lubrication Systems (ALS), Fire Suppression (AFSS), LHD buckets (4/7/10 ton), bucket blades</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER BRANDS -->
+<section class="partners-section">
+  <div class="wrap">
+    <h3>Brands & Equipment We Support</h3>
+    <div class="partners-grid">
+      <span class="partner-pill">Deutz</span>
+      <span class="partner-pill">Cummins</span>
+      <span class="partner-pill">Mercedes Benz</span>
+      <span class="partner-pill">Rexroth</span>
+      <span class="partner-pill">Sauer Danfoss</span>
+      <span class="partner-pill">Dana Spicer</span>
+      <span class="partner-pill">Kessler</span>
+      <span class="partner-pill">Atlas Copco</span>
+      <span class="partner-pill">Ingersoll Rand</span>
+      <span class="partner-pill">Chicago Pneumatic</span>
+      <span class="partner-pill">GHH</span>
+      <span class="partner-pill">EIMCO</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- EQUIPMENT IMAGE SHOWCASE -->
+<section style="padding: 44px 0 0; background: white;">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Our <span>Equipment</span></h2>
+      <span style="font-size:13px;color:var(--muted);">ACP-branded underground & surface machinery</span>
+    </div>
+    <div class="equip-showcase">
+      <div class="equip-showcase-main">
+        <img src="image/2.png" alt="ACP Industrial Equipment — Grouting & Spray Machine">
+      </div>
+      <div class="equip-showcase-grid">
+        <img src="image/3.png" alt="GHH Mining Loaders — Underground LHD">
+        <img src="image/4.png" alt="Mining Drill Rig — Tunneling Equipment">
+        <img src="image/5.png" alt="GHH MK-42 Low Profile Dump Truck">
+        <img src="image/6.png" alt="ACP Tunnel Drill Jumbo — Underground Drilling">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Spare Parts <span>Catalogue</span></h2>
+      <a href="products.html">View All Products →</a>
+    </div>
+
+    <!-- Sub-sector filter tabs -->
+    <div class="sub-tabs">
+      <button class="stab active" data-sector="all">All Parts</button>
+      <button class="stab" data-sector="Tunneling">Tunneling</button>
+      <button class="stab" data-sector="Mining">Mining</button>
+      <button class="stab" data-sector="Construction Equipment">Construction</button>
+    </div>
+
+    <div class="page-toolbar">
+      <span class="page-count" id="pageCount"></span>
+      <select class="sort-select" id="sortSelect">
+        <option value="default">Sort: Default</option>
+        <option value="az">Name: A–Z</option>
+        <option value="sector">Sort by Sector</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="productsGrid"></div>
+    <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--muted);">
+      <h3>No products found</h3>
+      <p><button onclick="resetFilters()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:inherit;font-weight:600;">Show all parts</button></p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BANNER -->
+<div class="wrap">
+  <div class="quote-banner">
+    <div>
+      <h2>Get a Free Quote for Your Project</h2>
+      <p>Can't find the part you need? Tell us the equipment model, part number or describe what you need — we'll source it and quote within a few hours.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;flex-shrink:0;">
+      <a href="contact.html" class="btn btn-amber">Send Inquiry</a>
+      <a href="https://wa.me/918881780590" target="_blank" rel="noopener noreferrer" class="btn" style="background:#25D366;color:white;">WhatsApp Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <img src="image/ACP.png" alt="ACP Logo" style="height:44px;width:auto;object-fit:contain;margin-bottom:10px;filter:brightness(0) invert(1);">
+        <p class="foot-tagline">Sales, Service & Spare Parts for mining, tunneling, construction and compressor equipment — shipped worldwide.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Equipment</h4>
+        <p>Load Haul Dumpers (LHD)</p>
+        <p>Low Profile Dump Trucks</p>
+        <p>Mining Drills & Jumbos</p>
+        <p>Mining Loaders</p>
+      </div>
+      <div class="foot-col">
+        <h4>Sectors</h4>
+        <a href="compressors.html">Industrial Compressors</a>
+        <a href="tunneling-mining-construction.html">Tunneling, Mining & Construction</a>
+        <a href="eot-cranes.html">EOT Cranes</a>
+        <a href="products.html">All Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <p>+91 88817 80590</p>
+        <p>+91 83070 28111</p>
+        <p>air_compressorproducts@yahoo.com</p>
+        <p>Rampur, U.P. 244901</p>
+        <p>Mon–Sat: 9:30 AM – 7:00 PM</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="year"></span> Air Compressor Products. All rights reserved.</span>
+      <span>Er. Deepank Bhatia, Business Director</span>
+    </div>
+  </div>
+</footer>
+<div id="toast"></div>
+
+<script src="products-data.js"></script>
+<script src="main.js"></script>
+<script>
+  const TMC_SECTORS = ['Tunneling', 'Mining', 'Construction Equipment'];
+  let activeTab = 'all';
+
+  function getProducts() {
+    let list = PRODUCTS.filter(p => TMC_SECTORS.includes(p.sector));
+    if (activeTab !== 'all') list = list.filter(p => p.sector === activeTab);
+    const s = document.getElementById('sortSelect').value;
+    if (s === 'az')     list = [...list].sort((a,b) => a.name.localeCompare(b.name));
+    if (s === 'sector') list = [...list].sort((a,b) => a.sector.localeCompare(b.sector));
+    return list;
+  }
+
+  function render() {
+    const list = getProducts();
+    const grid = document.getElementById('productsGrid');
+    const noRes = document.getElementById('noResults');
+    document.getElementById('pageCount').textContent =
+      list.length + ' part' + (list.length !== 1 ? 's' : '') + ' found';
+    if (list.length === 0) { grid.innerHTML = ''; noRes.style.display = 'block'; }
+    else { noRes.style.display = 'none'; grid.innerHTML = list.map(productCardHTML).join(''); }
+  }
+
+  function resetFilters() {
+    activeTab = 'all';
+    document.querySelectorAll('.stab').forEach(b => b.classList.toggle('active', b.dataset.sector === 'all'));
+    render();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Sub-sector tabs
+    document.querySelectorAll('.stab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeTab = btn.dataset.sector;
+        document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      });
+    });
+
+    // Equipment type tabs (just for visual highlight, not filtering products since cards are descriptive)
+    document.querySelectorAll('.etab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.etab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const equip = btn.dataset.equip;
+        document.querySelectorAll('.equip-card').forEach(card => {
+          card.style.opacity = (equip === 'all' || card.dataset.equip === equip) ? '1' : '0.3';
+          card.style.transform = (equip === 'all' || card.dataset.equip === equip) ? '' : 'scale(0.97)';
+        });
+      });
+    });
+
+    document.getElementById('sortSelect').addEventListener('change', render);
+    render();
+  });
+</script>
+</body>
+</html>
