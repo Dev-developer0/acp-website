@@ -164,27 +164,70 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 /* =============================================
-   HERO GALLERY — thumbnail click switches main image
+   HERO GALLERY — auto-rotating slideshow
    ============================================= */
 function initHeroGallery() {
   var main = document.querySelector('.hero-gallery-main');
   var thumbs = document.querySelectorAll('.hero-gallery-thumbs img');
   if (!main || !thumbs.length) return;
 
+  var imageSequence = [];
+  var currentIndex = 0;
+  var autoplayInterval = null;
+
+  // Store original images
+  thumbs.forEach(function(thumb, idx) {
+    imageSequence.push({ src: thumb.src, alt: thumb.alt });
+  });
+  
+  // Include main image as starting point
+  imageSequence.unshift({ src: main.src, alt: main.alt });
+
+  // Update main image display
+  function updateMainImage(index) {
+    currentIndex = index % imageSequence.length;
+    var image = imageSequence[currentIndex];
+    main.src = image.src;
+    main.alt = image.alt;
+    
+    // Update active thumbnail
+    thumbs.forEach(function(thumb, idx) {
+      thumb.classList.remove('active');
+      if (idx === currentIndex - 1) {
+        thumb.classList.add('active');
+      }
+    });
+  }
+
+  // Auto advance slideshow
+  function nextSlide() {
+    updateMainImage(currentIndex + 1);
+  }
+
+  // Start autoplay
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 3000);
+  }
+
+  // Pause on user interaction
+  function resetAutoplay() {
+    clearInterval(autoplayInterval);
+    startAutoplay();
+  }
+
   // Set first thumb as active
   thumbs[0].classList.add('active');
 
-  thumbs.forEach(function(thumb) {
+  // Thumbnail click handler
+  thumbs.forEach(function(thumb, idx) {
     thumb.addEventListener('click', function() {
-      // Swap src
-      var tempSrc = main.src;
-      var tempAlt = main.alt;
-      main.src = thumb.src;
-      main.alt = thumb.alt;
-      thumb.src = tempSrc;
-      thumb.alt = tempAlt;
+      updateMainImage(idx + 1);
+      resetAutoplay();
     });
   });
+
+  // Start the slideshow
+  startAutoplay();
 }
 
 /* =============================================
