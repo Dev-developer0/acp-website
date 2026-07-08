@@ -146,6 +146,9 @@
 <div class="wrap">
   <div class="page-toolbar">
     <span class="page-count" id="pageCount"></span>
+    <select class="sort-select" id="categorySelect">
+      <option value="all">Select a Category</option>
+    </select>
     <select class="sort-select" id="sortSelect">
       <option value="default">Sort: Default</option>
       <option value="az">Name: A–Z</option>
@@ -206,10 +209,24 @@
 <script src="main.js"></script>
 <script>
   let activeBrand = 'all';
+  let activeCategory = 'all';
+
+  function initCategorySelect() {
+    const categorySelect = document.getElementById('categorySelect');
+    if (!categorySelect) return;
+    const compressorCategories = [...new Set(PRODUCTS.filter(p => p.sector === 'Industrial Compressors').map(p => p.category))].sort();
+    categorySelect.innerHTML = '<option value="all">Select a Category</option>' +
+      compressorCategories.map(cat => '<option value="' + sanitize(cat) + '">' + sanitize(cat) + '</option>').join('');
+    categorySelect.addEventListener('change', () => {
+      activeCategory = categorySelect.value;
+      render();
+    });
+  }
 
   function getProducts() {
     let list = PRODUCTS.filter(p => p.sector === 'Industrial Compressors');
     if (activeBrand !== 'all') list = list.filter(p => p.brand === activeBrand);
+    if (activeCategory !== 'all') list = list.filter(p => p.category === activeCategory);
     const s = document.getElementById('sortSelect').value;
     if (s === 'az') list = [...list].sort((a,b) => a.name.localeCompare(b.name));
     if (s === 'brand') list = [...list].sort((a,b) => a.brand.localeCompare(b.brand));
@@ -225,9 +242,12 @@
     else { noRes.style.display = 'none'; grid.innerHTML = list.map(productCardHTML).join(''); }
   }
 
-  function resetBrand() {
+  function resetFilters() {
     activeBrand = 'all';
+    activeCategory = 'all';
     document.querySelectorAll('.bf-btn').forEach(b => b.classList.toggle('active', b.dataset.brand === 'all'));
+    const categorySelect = document.getElementById('categorySelect');
+    if (categorySelect) categorySelect.value = 'all';
     render();
   }
 
@@ -240,6 +260,7 @@
         render();
       });
     });
+    initCategorySelect();
     document.getElementById('sortSelect').addEventListener('change', render);
     render();
   });
