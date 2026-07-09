@@ -125,12 +125,18 @@
 }
 .cat-card-img img,
 .cat-card-img .cat-svg {
-  width: 100% !important;
-  height: 100% !important;
   object-fit: cover !important;
-  object-position: center !important;
+  object-position: center center !important;
 }
 .cat-card-img img {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: auto !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  transform: translate(-50%, -50%) !important;
   display: block !important;
 }
 /* full-bleed background cover used for photographic thumbnails */
