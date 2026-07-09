@@ -8,59 +8,217 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Industrial Compressors — A.C.P Air Compressor Products</title>
-<meta name="description" content="Genuine spare parts for Atlas Copco, ELGi, Ingersoll Rand, Kaeser, Chicago Pneumatic industrial compressors. Oil filters, air filters, rebuild kits and more.">
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  .sector-hero {
-    background: linear-gradient(135deg, #07111f 0%, #0f1d31 55%, #0c6d69 100%);
-    border-bottom: 4px solid var(--teal);
-    padding: 56px 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .sector-hero::before {
-    content:'';position:absolute;right:-80px;top:-80px;
-    width:420px;height:420px;border-radius:50%;
-    background:radial-gradient(circle,rgba(0,157,154,0.15) 0%,transparent 70%);
-    pointer-events:none;
-  }
-  .sector-hero-inner { position:relative;z-index:1; }
-  .sector-badge {
-    display:inline-flex;align-items:center;gap:8px;
-    background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);
-    color:#dff8f7;font-size:12px;font-weight:700;letter-spacing:0.1em;
-    text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:16px;
-  }
-  .sector-hero h1 { font-size:clamp(28px,4vw,44px);font-weight:800;color:white;margin-bottom:12px;line-height:1.08; }
-  .sector-hero p { font-size:16px;color:#cdd7e2;max-width:620px;margin-bottom:24px;line-height:1.7; }
-  .sector-stats { display:flex;gap:24px;flex-wrap:wrap;margin-top:28px; }
-  .stat { text-align:left;background:rgba(255,255,255,0.08);padding:12px 16px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;min-width:120px; }
-  .stat .num { font-size:24px;font-weight:800;color:#5de8e1; }
-  .stat .lbl { font-size:12px;color:#dfe8f2;text-transform:uppercase;letter-spacing:0.08em; }
-  .brand-filter-row {
-    background:rgba(255,255,255,0.95);border-bottom:1px solid var(--border);
-    padding:16px 0;box-shadow:0 8px 24px rgba(7,17,31,0.04);
-  }
-  .brand-filter-row .wrap {
-    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  }
-  .brand-filter-row .lbl { font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap; }
-  .bf-btn {
-    padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;
-    border:1.5px solid var(--border);background:white;cursor:pointer;
-    transition:all 0.15s;
-  }
-  .bf-btn:hover,.bf-btn.active { background:var(--ink);color:white;border-color:var(--ink); }
-  .page-toolbar {
-    display:flex;align-items:center;justify-content:space-between;
-    padding:24px 0 18px;flex-wrap:wrap;gap:10px;
-  }
-  .page-count { font-size:14px;color:var(--muted); }
+/* ---- HERO ---- */
+.sector-hero {
+  background: linear-gradient(135deg,#07111f 0%,#0f1d31 55%,#0c6d69 100%);
+  border-bottom: 4px solid #009D9A;
+  padding: 48px 0 40px;
+  position: relative;
+  overflow: hidden;
+}
+.sector-hero::before {
+  content:''; position:absolute; right:-80px; top:-80px;
+  width:420px; height:420px; border-radius:50%;
+  background:radial-gradient(circle,rgba(0,157,154,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.sector-hero-inner { position:relative; z-index:1; }
+.sector-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.18);
+  color:#dff8f7; font-size:12px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; padding:6px 14px; border-radius:999px; margin-bottom:14px;
+}
+.sector-hero h1 { font-size:clamp(26px,4vw,40px); font-weight:800; color:white; margin-bottom:10px; line-height:1.1; }
+.sector-hero p  { font-size:15px; color:#cdd7e2; max-width:600px; margin-bottom:22px; line-height:1.7; }
+.sector-stats { display:flex; gap:16px; flex-wrap:wrap; margin-top:22px; }
+.stat { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:10px; padding:10px 18px; }
+.stat .num { font-size:22px; font-weight:800; color:#5de8e1; }
+.stat .lbl { font-size:11px; color:#dfe8f2; text-transform:uppercase; letter-spacing:0.07em; }
+
+/* ---- BRAND FILTER ---- */
+.brand-filter-row {
+  background: white;
+  border-bottom: 2px solid #e0e0e0;
+  padding: 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.brand-filter-row .wrap {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  align-items: center;
+}
+.bf-btn {
+  padding: 13px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #666;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.bf-btn:hover  { color: #111; }
+.bf-btn.active { color: #009D9A; border-bottom-color: #009D9A; }
+
+/* ---- CATEGORY VIEW ---- */
+#categoryView { padding: 36px 0 44px; }
+.cat-page-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 28px;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* ── THE GRID — force 4 columns ── */
+.cat-grid-wb {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 18px !important;
+  width: 100%;
+}
+
+/* ── Category card — same size as product card ── */
+.cat-card-wb {
+  background: white !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  transition: box-shadow .18s, transform .18s, border-color .18s !important;
+  display: flex !important;
+  flex-direction: column !important;
+  text-decoration: none !important;
+  color: #222 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  height: 100% !important;
+}
+.cat-card-wb:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1) !important;
+  transform: translateY(-2px) !important;
+  border-color: #009D9A !important;
+}
+
+/* ── Image area — exactly like product card ── */
+.cat-card-img {
+  width: 100% !important;
+  height: 190px !important;
+  background: linear-gradient(135deg,#f8f8f8,#eeeeee) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-bottom: 1px solid var(--border) !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+}
+.cat-card-img img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+/* SVG inside category card — controlled size */
+.cat-card-img .cat-svg {
+  width: 100px !important;
+  height: 80px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.cat-card-img .cat-svg svg {
+  width: 100px !important;
+  height: 80px !important;
+}
+
+/* ── Info area ── */
+.cat-card-info {
+  padding: 14px !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+}
+.cat-card-info h4 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+  margin: 0 !important;
+  line-height: 1.35 !important;
+  font-family: 'IBM Plex Sans', sans-serif !important;
+}
+.cat-card-info .cat-count {
+  font-size: 12px !important;
+  color: #888 !important;
+  font-family: 'IBM Plex Sans', sans-serif !important;
+}
+.cat-card-info .view-btn {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #009D9A !important;
+  display: inline-block !important;
+  margin-top: auto !important;
+}
+
+/* ---- PRODUCT VIEW ---- */
+#productView { display: none; padding: 32px 0 44px; }
+.pv-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e0e0e0;
+}
+.pv-left { display: flex; align-items: center; gap: 14px; }
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 16px; border-radius: 6px;
+  border: 1.5px solid #e0e0e0; background: white;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  color: #222; transition: border-color .15s, color .15s;
+  white-space: nowrap; font-family: 'IBM Plex Sans', sans-serif;
+}
+.back-btn:hover { border-color: #009D9A; color: #009D9A; }
+.pv-title { font-size: 20px; font-weight: 800; color: #111; }
+.pv-title span { color: #009D9A; }
+.pv-count { font-size: 13px; color: #888; }
+
+/* ---- WHY ACP ---- */
+.why-section { background: #f5f6f7; border-top: 1px solid #e0e0e0; padding: 40px 0; }
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.why-card { background: white; border: 1px solid #e0e0e0; border-radius: 10px; padding: 22px; }
+.why-card .why-icon { color: #009D9A; margin-bottom: 10px; }
+.why-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; margin-top: 0; }
+.why-card p  { font-size: 13.5px; color: #666; margin: 0; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .cat-grid-wb { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 700px) {
+  .cat-grid-wb { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  .cat-card-img { height: 190px !important; }
+  .why-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
+<!-- UTILITY BAR -->
 <div class="utility-bar">
   <div class="wrap">
     <span class="util-left">🌍 Shipping Worldwide — Dispatch within 24 hrs</span>
@@ -71,13 +229,14 @@
   </div>
 </div>
 
+<!-- HEADER -->
 <header class="main-header">
   <div class="header-inner wrap">
     <a href="index.html" class="logo-block">
       <img src="image/ACP.png" alt="ACP — Air Compressor Products" class="logo-img">
     </a>
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search compressor parts..." maxlength="120" autocomplete="off">
+      <input type="text" id="searchInput" placeholder="Search compressor parts or part number..." maxlength="120" autocomplete="off">
       <button id="searchBtn" aria-label="Search">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       </button>
@@ -90,6 +249,7 @@
   </div>
 </header>
 
+<!-- NAV -->
 <nav class="main-nav">
   <div class="nav-inner wrap">
     <div id="navLinks" class="nav-links">
@@ -106,96 +266,74 @@
     </button>
   </div>
 </nav>
-
-<!-- SECTOR HERO -->
-<section class="sector-hero">
-  <div class="wrap sector-hero-inner">
-    <div class="sector-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-      Industrial Compressors
-    </div>
-    <h1>Genuine Spare Parts for<br>All Major Compressor Brands</h1>
-    <p>Oil filters, air filters, oil separators, rebuild kits, belts, bearings and valves — sourced for Atlas Copco, Ingersoll Rand, ELGi, Kaeser and Chicago Pneumatic. Pan-India dispatch, worldwide export.</p>
-    <div class="cta-row">
-      <a href="contact.html" class="btn btn-teal">Get a Quote</a>
-      <a href="tel:+918881780590" class="btn btn-outline">Call Now</a>
-    </div>
-    <div class="sector-stats">
-      <div class="stat"><div class="num">5</div><div class="lbl">Major Brands</div></div>
-      <div class="stat"><div class="num">35+</div><div class="lbl">Products</div></div>
-      <div class="stat"><div class="num">24hr</div><div class="lbl">Dispatch</div></div>
-      <div class="stat"><div class="num">WW</div><div class="lbl">Shipping</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- BRAND FILTER ROW -->
-<div class="brand-filter-row">
+<!-- CATEGORY VIEW — shows on page load -->
+<div id="categoryView">
   <div class="wrap">
-    <span class="lbl">Filter by Brand:</span>
-    <button class="bf-btn active" data-brand="all">All Brands</button>
-    <button class="bf-btn" data-brand="Atlas Copco">Atlas Copco</button>
-    <button class="bf-btn" data-brand="Ingersoll Rand">Ingersoll Rand</button>
-    <button class="bf-btn" data-brand="ELGi">ELGi</button>
-    <button class="bf-btn" data-brand="Kaeser">Kaeser</button>
-    <button class="bf-btn" data-brand="Chicago Pneumatic">Chicago Pneumatic</button>
+    <div class="cat-page-title">Select a Category</div>
+    <div class="product-grid cat-grid-wb" id="catGrid"></div>
   </div>
 </div>
 
-<!-- PRODUCTS -->
-<div class="wrap">
-  <div class="page-toolbar">
-    <span class="page-count" id="pageCount"></span>
-    <select class="sort-select" id="categorySelect">
-      <option value="all">Select a Category</option>
-    </select>
-    <select class="sort-select" id="sortSelect">
-      <option value="default">Sort: Default</option>
-      <option value="az">Name: A–Z</option>
-      <option value="brand">Sort by Brand</option>
-    </select>
-  </div>
-  <div class="product-grid" id="productsGrid"></div>
-  <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--muted);background:white;border:1px solid var(--border);border-radius:18px;margin-top:16px;box-shadow:0 12px 30px rgba(7,17,31,0.05);">
-    <h3>No products found for this filter</h3>
-    <p><button onclick="resetBrand()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:inherit;font-weight:600;">Show all brands</button></p>
+<!-- PRODUCT VIEW — shows after clicking a category -->
+<div id="productView">
+  <div class="wrap">
+    <div class="pv-topbar">
+      <div class="pv-left">
+        <button class="back-btn" onclick="showCategories()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back to Categories
+        </button>
+        <div>
+          <div class="pv-title" id="pvTitle"></div>
+          <div class="pv-count" id="pvCount"></div>
+        </div>
+      </div>
+      <select class="sort-select" id="sortSelect" onchange="renderProducts()">
+        <option value="default">Sort: Default</option>
+        <option value="az">Name: A–Z</option>
+        <option value="brand">Sort by Brand</option>
+      </select>
+    </div>
+    <div class="product-grid" id="productsGrid"></div>
+    <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--muted);">
+      <h3>No products found</h3>
+      <button onclick="showCategories()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:15px;font-weight:600;margin-top:10px;">← Back to Categories</button>
+    </div>
   </div>
 </div>
 
-<!-- WHY ACP SECTION -->
-<section style="background:linear-gradient(180deg,#f8fbff 0%, #f4f7fb 100%);padding:44px 0;margin-top:44px;">
+<!-- WHY ACP -->
+<section class="why-section">
   <div class="wrap">
-    <div class="section-header"><h2>Why Source From <span>A.C.P</span></h2></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
-      <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:24px;box-shadow:0 12px 30px rgba(7,17,31,0.05);">
-        <div style="color:var(--teal);margin-bottom:12px;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <h4 style="font-size:15px;margin-bottom:8px;">Genuine Quality Parts</h4>
-        <p style="font-size:13.5px;color:var(--muted);">Original-spec components for all major compressor brands — no counterfeit, no compromise.</p>
+    <div class="section-header" style="margin-bottom:20px;"><h2>Why Source From <span>A.C.P</span></h2></div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h4>Genuine Quality Parts</h4>
+        <p>Original-spec components for all major compressor brands — no counterfeit, no compromise.</p>
       </div>
-      <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:24px;box-shadow:0 12px 30px rgba(7,17,31,0.05);">
-        <div style="color:var(--teal);margin-bottom:12px;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <h4 style="font-size:15px;margin-bottom:8px;">Fast Dispatch</h4>
-        <p style="font-size:13.5px;color:var(--muted);">Pan-India dispatch within 24 hours. International export available — ask for lead time to your location.</p>
+      <div class="why-card">
+        <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Fast 24hr Dispatch</h4>
+        <p>Pan-India dispatch within 24 hours. International export available — ask for lead time.</p>
       </div>
-      <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:24px;box-shadow:0 12px 30px rgba(7,17,31,0.05);">
-        <div style="color:var(--teal);margin-bottom:12px;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h4 style="font-size:15px;margin-bottom:8px;">Expert Support</h4>
-        <p style="font-size:13.5px;color:var(--muted);">Talk directly to Er. Deepank Bhatia for technical advice on which part fits your compressor model.</p>
+      <div class="why-card">
+        <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h4>Expert Technical Support</h4>
+        <p>Talk to Er. Deepank Bhatia directly for advice on which part fits your compressor model.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div class="foot-about"><img src="image/ACP.png" alt="ACP Logo" style="height:44px;width:auto;object-fit:contain;margin-bottom:10px;filter:brightness(0) invert(1);"><p class="foot-tagline">Sales, Service & Spare Parts — shipped worldwide.</p></div>
+      <div class="foot-about">
+        <img src="image/ACP.png" alt="ACP Logo" style="height:44px;width:auto;object-fit:contain;margin-bottom:10px;filter:brightness(0) invert(1);">
+        <p class="foot-tagline">Sales, Service & Spare Parts — shipped worldwide.</p>
+      </div>
       <div class="foot-col"><h4>Sectors</h4><a href="compressors.html">Industrial Compressors</a><a href="tunneling-mining-construction.html">Tunneling, Mining & Construction</a><a href="eot-cranes.html">EOT Cranes</a><a href="products.html">All Products</a></div>
       <div class="foot-col"><h4>Services</h4><p>Genuine Spare Parts</p><p>Compressor Sales</p><p>Maintenance & AMC</p><p>Complete Project Solutions</p></div>
       <div class="foot-col"><h4>Contact</h4><p>+91 88817 80590</p><p>+91 83070 28111</p><p>air_compressorproducts@yahoo.com</p><p>Rampur, U.P. 244901</p></div>
@@ -208,62 +346,141 @@
 <script src="products-data.js"></script>
 <script src="main.js"></script>
 <script>
-  let activeBrand = 'all';
-  let activeCategory = 'all';
+'use strict';
 
-  function initCategorySelect() {
-    const categorySelect = document.getElementById('categorySelect');
-    if (!categorySelect) return;
-    const compressorCategories = [...new Set(PRODUCTS.filter(p => p.sector === 'Industrial Compressors').map(p => p.category))].sort();
-    categorySelect.innerHTML = '<option value="all">Select a Category</option>' +
-      compressorCategories.map(cat => '<option value="' + sanitize(cat) + '">' + sanitize(cat) + '</option>').join('');
-    categorySelect.addEventListener('change', () => {
-      activeCategory = categorySelect.value;
-      render();
-    });
-  }
+// ── Categories — add img path once you have cover photos ──
+var COMP_CATS = [
+  { name:'IR Kits',              cat:'Valve & Rebuild Kits', nameFilter:'IR Kit',       imgType:'kit',        img:'' },
+  { name:'Air Filter',           cat:'Air Filters',          nameFilter:'',             imgType:'air-filter', img:'' },
+  { name:'Oil Filter',           cat:'Oil Filters',          nameFilter:'',             imgType:'oil-filter', img:'' },
+  { name:'Oil Separator',        cat:'Oil Separators',       nameFilter:'',             imgType:'separator',  img:'' },
+  { name:'Rebuild & Valve Kits', cat:'Valve & Rebuild Kits', nameFilter:'',             imgType:'kit',        img:'' },
+  { name:'Gasket Kits',          cat:'Gasket Kits',          nameFilter:'',             imgType:'gasket',     img:'' },
+  { name:'Bearing Kits',         cat:'Bearing Kits',         nameFilter:'',             imgType:'bearing',    img:'' },
+  { name:'Belts',                cat:'Belts',                nameFilter:'',             imgType:'belt',       img:'' },
+  { name:'MPV / Pressure Valve', cat:'Valves',               nameFilter:'Pressure',     imgType:'valve',      img:'' },
+  { name:'Thermostatic Valve',   cat:'Valves',               nameFilter:'Thermostatic', imgType:'valve',      img:'' },
+  { name:'Safety Valve',         cat:'Valves',               nameFilter:'Safety',       imgType:'valve',      img:'' },
+  { name:'Service Kits',         cat:'Valve & Rebuild Kits', nameFilter:'Service Kit',  imgType:'kit',        img:'' },
+  { name:'All Valves',           cat:'Valves',               nameFilter:'',             imgType:'valve',      img:'' },
+];
 
-  function getProducts() {
-    let list = PRODUCTS.filter(p => p.sector === 'Industrial Compressors');
-    if (activeBrand !== 'all') list = list.filter(p => p.brand === activeBrand);
-    if (activeCategory !== 'all') list = list.filter(p => p.category === activeCategory);
-    const s = document.getElementById('sortSelect').value;
-    if (s === 'az') list = [...list].sort((a,b) => a.name.localeCompare(b.name));
-    if (s === 'brand') list = [...list].sort((a,b) => a.brand.localeCompare(b.brand));
-    return list;
-  }
+var activeBrand = 'all';
+var activeCat   = null;
+var activeFilter = null;
 
-  function render() {
-    const list = getProducts();
-    const grid = document.getElementById('productsGrid');
-    const noRes = document.getElementById('noResults');
-    document.getElementById('pageCount').textContent = list.length + ' product' + (list.length !== 1 ? 's' : '');
-    if (list.length === 0) { grid.innerHTML = ''; noRes.style.display = 'block'; }
-    else { noRes.style.display = 'none'; grid.innerHTML = list.map(productCardHTML).join(''); }
-  }
+function getBase() {
+  var list = PRODUCTS.filter(function(p){ return p.sector === 'Industrial Compressors'; });
+  if (activeBrand !== 'all') list = list.filter(function(p){ return p.brand === activeBrand; });
+  return list;
+}
 
-  function resetFilters() {
-    activeBrand = 'all';
-    activeCategory = 'all';
-    document.querySelectorAll('.bf-btn').forEach(b => b.classList.toggle('active', b.dataset.brand === 'all'));
-    const categorySelect = document.getElementById('categorySelect');
-    if (categorySelect) categorySelect.value = 'all';
-    render();
-  }
+function countCat(c) {
+  return getBase().filter(function(p){
+    var cm = p.category === c.cat;
+    var fm = !c.nameFilter || p.name.toLowerCase().indexOf(c.nameFilter.toLowerCase()) !== -1;
+    return cm && fm;
+  }).length;
+}
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.bf-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeBrand = btn.dataset.brand;
-        document.querySelectorAll('.bf-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        render();
-      });
-    });
-    initCategorySelect();
-    document.getElementById('sortSelect').addEventListener('change', render);
-    render();
+// ── Render category grid ──
+function renderCategories() {
+  var grid = document.getElementById('catGrid');
+  var html = '';
+  COMP_CATS.forEach(function(c) {
+    var count = countCat(c);
+    if (count === 0) return;
+
+    // Image area: real photo OR SVG illustration
+    var imgHTML = '';
+    if (c.img) {
+      imgHTML = '<img src="' + c.img + '" alt="' + c.name + '">';
+    } else {
+      var svg = (typeof getProductSVG === 'function') ? getProductSVG(c.imgType) : '';
+      imgHTML = '<div class="cat-svg">' + svg + '</div>';
+    }
+
+    html += '<div class="cat-card-wb" onclick="showProducts(\'' +
+      c.name.replace(/'/g,"\\'") + '\',\'' +
+      c.cat.replace(/'/g,"\\'") + '\',\'' +
+      c.nameFilter.replace(/'/g,"\\'") + '\')">' +
+      '<div class="cat-card-img">' + imgHTML + '</div>' +
+      '<div class="cat-card-info">' +
+        '<h4>' + c.name + '</h4>' +
+        '<span class="cat-count">' + count + ' Product' + (count !== 1 ? 's' : '') + '</span>' +
+        '<span class="view-btn">View Products →</span>' +
+      '</div>' +
+    '</div>';
   });
+  grid.innerHTML = html || '<p style="color:var(--muted);padding:40px 0;">No products available for this brand.</p>';
+}
+
+// ── Show products view ──
+function showProducts(name, cat, filter) {
+  activeCat    = cat;
+  activeFilter = filter;
+  document.getElementById('pvTitle').innerHTML = name + ' <span>Parts</span>';
+  document.getElementById('categoryView').style.display = 'none';
+  document.getElementById('productView').style.display  = 'block';
+  renderProducts();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Go back to categories ──
+function showCategories() {
+  activeCat    = null;
+  activeFilter = null;
+  document.getElementById('productView').style.display  = 'none';
+  document.getElementById('categoryView').style.display = 'block';
+  renderCategories();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Render products in selected category ──
+function renderProducts() {
+  var list = getBase().filter(function(p){
+    var cm = p.category === activeCat;
+    var fm = !activeFilter || p.name.toLowerCase().indexOf(activeFilter.toLowerCase()) !== -1;
+    return cm && fm;
+  });
+
+  var s = document.getElementById('sortSelect').value;
+  if (s === 'az')    list = list.slice().sort(function(a,b){ return a.name.localeCompare(b.name); });
+  if (s === 'brand') list = list.slice().sort(function(a,b){ return a.brand.localeCompare(b.brand); });
+
+  var grid  = document.getElementById('productsGrid');
+  var noRes = document.getElementById('noResults');
+  var count = document.getElementById('pvCount');
+
+  count.textContent = list.length + ' product' + (list.length !== 1 ? 's' : '') + ' found';
+
+  if (list.length === 0) {
+    grid.innerHTML = '';
+    noRes.style.display = 'block';
+  } else {
+    noRes.style.display = 'none';
+    grid.innerHTML = list.map(function(p){ return productCardHTML(p); }).join('');
+  }
+}
+
+// ── Brand tab click ──
+document.querySelectorAll('.bf-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    activeBrand = btn.getAttribute('data-brand');
+    document.querySelectorAll('.bf-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    if (document.getElementById('productView').style.display === 'block') {
+      renderProducts();
+    } else {
+      renderCategories();
+    }
+  });
+});
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', function() {
+  renderCategories();
+});
 </script>
 </body>
 </html>
