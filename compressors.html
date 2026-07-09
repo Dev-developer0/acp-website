@@ -121,24 +121,35 @@
   overflow: hidden !important;
   flex-shrink: 0 !important;
   box-sizing: border-box !important;
+  position: relative !important;
 }
-.cat-card-img img {
+.cat-card-img img,
+.cat-card-img .cat-svg {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  object-position: center !important;
+}
+.cat-card-img img {
   display: block !important;
+}
+/* full-bleed background cover used for photographic thumbnails */
+.cat-card-img .cat-cover {
+  width: 100% !important;
+  height: 100% !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
 }
 /* SVG inside category card — controlled size */
 .cat-card-img .cat-svg {
-  width: 100px !important;
-  height: 80px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  padding: 20px !important;
 }
 .cat-card-img .cat-svg svg {
-  width: 100px !important;
-  height: 80px !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 140px !important;
+  max-height: 120px !important;
 }
 
 /* ── Info area ── */
@@ -350,19 +361,32 @@
 
 // ── Categories — add img path once you have cover photos ──
 var COMP_CATS = [
-  { name:'IR Kits',              cat:'Valve & Rebuild Kits', nameFilter:'IR Kit',       imgType:'kit',        img:'' },
-  { name:'Air Filter',           cat:'Air Filters',          nameFilter:'',             imgType:'air-filter', img:'' },
-  { name:'Oil Filter',           cat:'Oil Filters',          nameFilter:'',             imgType:'oil-filter', img:'' },
-  { name:'Oil Separator',        cat:'Oil Separators',       nameFilter:'',             imgType:'separator',  img:'' },
-  { name:'Rebuild & Valve Kits', cat:'Valve & Rebuild Kits', nameFilter:'',             imgType:'kit',        img:'' },
-  { name:'Gasket Kits',          cat:'Gasket Kits',          nameFilter:'',             imgType:'gasket',     img:'' },
-  { name:'Bearing Kits',         cat:'Bearing Kits',         nameFilter:'',             imgType:'bearing',    img:'' },
-  { name:'Belts',                cat:'Belts',                nameFilter:'',             imgType:'belt',       img:'' },
-  { name:'MPV / Pressure Valve', cat:'Valves',               nameFilter:'Pressure',     imgType:'valve',      img:'' },
-  { name:'Thermostatic Valve',   cat:'Valves',               nameFilter:'Thermostatic', imgType:'valve',      img:'' },
-  { name:'Safety Valve',         cat:'Valves',               nameFilter:'Safety',       imgType:'valve',      img:'' },
-  { name:'Service Kits',         cat:'Valve & Rebuild Kits', nameFilter:'Service Kit',  imgType:'kit',        img:'' },
-  { name:'All Valves',           cat:'Valves',               nameFilter:'',             imgType:'valve',      img:'' },
+  { name:'Air Filter',                cat:'Air Filters',          nameFilter:'',            imgType:'air-filter', img:'image/Compressors Category/Air Filter cover.jpeg' },
+  { name:'Air Filter Housing',        cat:'Air Filters',          nameFilter:'Housing',     imgType:'air-filter', img:'image/Compressors Category/Air Filter Houshing cover.jpeg' },
+  { name:'Atlas Replacement Parts',   cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/Atlas Replacement Parts cover.jpeg' },
+  { name:'Auto-Drain Valve',          cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/Auto-Drain Valve cover.jpeg' },
+  { name:'BDV',                       cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/BDV cover.jpeg' },
+  { name:'BDV Kit',                   cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/BDV Kit.jpeg' },
+  { name:'Cable',                     cat:'Belts',                nameFilter:'',            imgType:'belt',       img:'image/Compressors Category/Cable cover.jpeg' },
+  { name:'Controller',                cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/Controller cover.jpeg' },
+  { name:'Cylinder',                  cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/Cylinder cover.jpeg' },
+  { name:'ELGI Replacement Kit',      cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/ELGI Replacement Kit cover.jpeg' },
+  { name:'Fan Assembly',              cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/Fan Assembly cover.jpeg' },
+  { name:'Gas Spring',                cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/Gas Spring cover.jpeg' },
+  { name:'Intake Valve',              cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/Intake Valve cover.jpeg' },
+  { name:'IR Kit',                    cat:'Valve & Rebuild Kits', nameFilter:'IR Kit',       imgType:'kit',        img:'image/Compressors Category/IR Kit cover.jpeg' },
+  { name:'Kaeser Replacement Parts',  cat:'Valve & Rebuild Kits', nameFilter:'',            imgType:'kit',        img:'image/Compressors Category/Kaeser Replacement Parts covers.jpeg' },
+  { name:'Micro-Filter',              cat:'Air Filters',          nameFilter:'',            imgType:'air-filter', img:'image/Compressors Category/Micro-Filter cover.jpeg' },
+  { name:'MPV Valve',                 cat:'Valves',               nameFilter:'Pressure',     imgType:'valve',      img:'image/Compressors Category/MPV Valve.jpeg' },
+  { name:'NRV',                       cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/NRV cover.jpeg' },
+  { name:'Oil Filter',                cat:'Oil Filters',          nameFilter:'',            imgType:'oil-filter', img:'image/Compressors Category/OIl Filter cover.jpeg' },
+  { name:'Oil Level Indicator',       cat:'Oil Filters',          nameFilter:'',            imgType:'oil-filter', img:'image/Compressors Category/Oil Level Indicator cover.jpeg' },
+  { name:'Oil Separator',             cat:'Oil Separators',       nameFilter:'',            imgType:'separator',  img:'image/Compressors Category/Oil Separator.jpeg' },
+  { name:'Regulation Valve',          cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/Regulation Valve cover.jpeg' },
+  { name:'Sensore Cover',             cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/Sensore Cover.jpeg' },
+  { name:'Solenoid Valve',            cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/Solenoid Valve.jpeg' },
+  { name:'Thermostate Valve',         cat:'Valves',               nameFilter:'Thermostatic',imgType:'valve',      img:'image/Compressors Category/Thermostate Valve.jpeg' },
+  { name:'Vent Valve',                cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/Vent Valve.jpeg' },
 ];
 
 var activeBrand = 'all';
@@ -389,9 +413,8 @@ function renderCategories() {
   var html = '';
   COMP_CATS.forEach(function(c) {
     var count = countCat(c);
-    if (count === 0) return;
 
-    // Image area: real photo OR SVG illustration
+    // Image area: real photo OR SVG illustration. Use background cover for photos
     var imgHTML = '';
     if (c.img) {
       imgHTML = '<img src="' + c.img + '" alt="' + c.name + '">';
@@ -407,7 +430,7 @@ function renderCategories() {
       '<div class="cat-card-img">' + imgHTML + '</div>' +
       '<div class="cat-card-info">' +
         '<h4>' + c.name + '</h4>' +
-        '<span class="cat-count">' + count + ' Product' + (count !== 1 ? 's' : '') + '</span>' +
+        '<span class="cat-count">' + (count > 0 ? (count + ' Product' + (count !== 1 ? 's' : '')) : 'Coming soon') + '</span>' +
         '<span class="view-btn">View Products →</span>' +
       '</div>' +
     '</div>';
