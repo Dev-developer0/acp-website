@@ -1330,3 +1330,35 @@ footer {
   .equip-showcase-grid { grid-template-columns: 1fr 1fr; }
   .equip-showcase-grid img { height: 110px; }
 }
+
+/* ============================================
+   ACP LOADING SPINNER
+   ============================================ */
+#acpSpinner {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+}
+.acp-spin-ring {
+  width: 52px;
+  height: 52px;
+  border: 5px solid #e0e0e0;
+  border-top-color: #009D9A;
+  border-radius: 50%;
+  animation: acpSpin 0.8s linear infinite;
+}
+@keyframes acpSpin {
+  to { transform: rotate(360deg); }
+}
+.acp-spin-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
+}

@@ -238,14 +238,19 @@ connect-src 'self'; frame-ancestors 'none';">
     }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', function() {
     getURLParams();
     if (searchQuery && document.getElementById('searchInput')) {
       document.getElementById('searchInput').value = searchQuery;
     }
+    document.getElementById('sortSelect').addEventListener('change', renderProducts);
+  });
+
+  // Wait for Google Sheets data
+  document.addEventListener('productsReady', function() {
+    getURLParams();
     buildFilters();
     renderProducts();
-    document.getElementById('sortSelect').addEventListener('change', renderProducts);
   });
 </script>
 </body>
