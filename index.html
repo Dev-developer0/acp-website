@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- SECURITY HEADERS -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; frame-ancestors 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://docs.google.com https://*.googleusercontent.com; frame-ancestors 'none';">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -183,7 +183,7 @@
 <script src="main.js"></script>
 <script>
   // Render 8 featured products on homepage
-  document.addEventListener('DOMContentLoaded', () => {
+  onProductsReady(() => {
     const featured = PRODUCTS.slice(0, 8);
     document.getElementById('featuredGrid').innerHTML = featured.map(productCardHTML).join('');
   });

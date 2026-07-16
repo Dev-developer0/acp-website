@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; frame-ancestors 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://docs.google.com https://*.googleusercontent.com; frame-ancestors 'none';">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Industrial Compressors — A.C.P Air Compressor Products</title>
@@ -510,6 +510,8 @@ document.querySelectorAll('.bf-btn').forEach(function(btn) {
 document.addEventListener('DOMContentLoaded', function() {
   renderCategories();
 });
+
+onProductsReady(renderCategories);
 </script>
 </body>
 </html>
