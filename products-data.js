@@ -65,18 +65,31 @@ function parseCSV(text) {
     var obj  = {};
     headers.forEach(function(h, idx) { obj[h] = (vals[idx] || '').replace(/"/g,'').trim(); });
 
-    if (!obj.id || !obj.name) continue; // skip empty rows
+    // Support both the documented headers and the current Sheet headers
+    // (blank ID header, "Name", and "Part No"). Positional fallbacks keep
+    // existing rows working until the headers are renamed in the Sheet.
+    var id       = obj.id       || obj.ID       || vals[0] || '';
+    var name     = obj.name     || obj.Name     || vals[1] || '';
+    var partNo   = obj.partNo   || obj['Part No'] || vals[2] || '';
+    var brand    = obj.brand    || obj.Brand    || vals[3] || '';
+    var sector   = obj.sector   || obj.Sector   || vals[4] || 'Industrial Compressors';
+    var category = obj.category || obj.Category || vals[5] || '';
+    var imgType  = obj.imgType  || vals[6] || 'kit';
+    var img      = obj.img      || vals[7] || '';
+    var desc     = obj.desc     || obj.Desc     || vals[8] || '';
+
+    if (!id || !name) continue; // skip empty rows
 
     products.push({
-      id:       obj.id,
-      name:     obj.name,
-      partNo:   obj.partNo   || '',
-      brand:    obj.brand    || '',
-      sector:   obj.sector   || 'Industrial Compressors',
-      category: obj.category || '',
-      imgType:  obj.imgType  || 'kit',
-      img:      obj.img      || '',
-      desc:     obj.desc     || ''
+      id:       id,
+      name:     name,
+      partNo:   partNo,
+      brand:    brand,
+      sector:   sector,
+      category: category,
+      imgType:  imgType,
+      img:      img,
+      desc:     desc
     });
   }
   return products;
