@@ -8,12 +8,21 @@
 script-src 'self' 'unsafe-inline'; 
 style-src 'self' https://fonts.googleapis.com; 
 font-src 'self' https://fonts.gstatic.com; 
-img-src 'self' data: https://images.unsplash.com; 
+img-src 'self' data: https://images.unsplash.com https://drive.google.com https://*.googleusercontent.com; 
 connect-src 'self' https://docs.google.com https://*.googleusercontent.com; frame-ancestors 'none';">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Products — A.C.P Air Compressor Products</title>
+<meta name="description" content="Browse the full A.C.P catalogue of genuine spare parts by category — filters, valves, belts, bearings, gaskets and more for all major industrial equipment brands.">
+<link rel="canonical" href="https://www.acpindustrial.com/products.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="All Products — A.C.P Air Compressor Products">
+<meta property="og:description" content="Browse the full A.C.P catalogue of genuine spare parts by category.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.acpindustrial.com/products.html">
+<meta property="og:image" content="https://www.acpindustrial.com/image/ACP.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -72,34 +81,26 @@ connect-src 'self' https://docs.google.com https://*.googleusercontent.com; fram
   </div>
 </div>
 
-<div class="wrap products-layout">
+<div class="wrap">
+  <!-- CATEGORY VIEW — shows on page load -->
+  <div id="categoryView">
+    <div class="cat-page-title">Select a Category</div>
+    <div class="product-grid cat-grid-wb" id="catGrid"></div>
+  </div>
 
-  <!-- SIDEBAR FILTERS -->
-  <aside class="filter-sidebar">
-    <h3>Filter Products</h3>
-
-    <div class="filter-group">
-      <label>Brand</label>
-      <div id="brandFilters"></div>
-    </div>
-
-    <div class="filter-group">
-      <label>Category</label>
-      <div id="catFilters"></div>
-    </div>
-
-    <div class="filter-group">
-      <label>Sector</label>
-      <div id="sectorFilters"></div>
-    </div>
-
-    <button class="btn btn-teal btn-sm" onclick="clearFilters()" style="width:100%;justify-content:center;margin-top:8px;">Clear Filters</button>
-  </aside>
-
-  <!-- PRODUCTS MAIN -->
-  <div class="products-main">
-    <div class="products-toolbar">
-      <span class="products-count" id="productsCount"></span>
+  <!-- PRODUCT VIEW — shows after clicking a category / searching -->
+  <div id="productView">
+    <div class="pv-topbar">
+      <div class="pv-left">
+        <button class="back-btn" onclick="showCategories()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back to Categories
+        </button>
+        <div>
+          <div class="pv-title" id="pvTitle"></div>
+          <div class="pv-count" id="pvCount"></div>
+        </div>
+      </div>
       <select class="sort-select" id="sortSelect">
         <option value="default">Sort: Default</option>
         <option value="az">Name: A–Z</option>
@@ -111,7 +112,7 @@ connect-src 'self' https://docs.google.com https://*.googleusercontent.com; fram
     <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--muted);">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 16px;display:block"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <h3 style="margin-bottom:8px;">No products found</h3>
-      <p>Try a different search term or <button onclick="clearFilters()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:inherit;font-weight:600;">clear filters</button></p>
+      <button onclick="showCategories()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:15px;font-weight:600;margin-top:10px;">← Back to Categories</button>
     </div>
   </div>
 </div>
@@ -137,120 +138,131 @@ connect-src 'self' https://docs.google.com https://*.googleusercontent.com; fram
 <script src="products-data.js"></script>
 <script src="main.js"></script>
   <script>
-  let activeFilters = { brands: new Set(), cats: new Set(), sectors: new Set() };
-  let searchQuery = '';
+  'use strict';
+
+  // Categories mirror the "category (copy exactly)" list in SHEET-SETUP.md.
+  // Icon fallback uses the same SVG set as compressors.html / main.js.
+  var ALL_CATS = [
+    { name: 'Valve & Rebuild Kits', imgType: 'kit' },
+    { name: 'Oil Filters',          imgType: 'oil-filter' },
+    { name: 'Air Filters',          imgType: 'air-filter' },
+    { name: 'Oil Separators',       imgType: 'separator' },
+    { name: 'Valves',               imgType: 'valve' },
+    { name: 'Belts',                imgType: 'belt' },
+    { name: 'Bearing Kits',         imgType: 'bearing' },
+    { name: 'Gasket Kits',          imgType: 'gasket' },
+    { name: 'Engine Parts',         imgType: 'kit' },
+    { name: 'Hydraulic Parts',      imgType: 'valve' },
+    { name: 'Axle & Transmission',  imgType: 'bearing' },
+    { name: 'Drifter Parts',        imgType: 'drill' },
+    { name: 'Mining Accessories',   imgType: 'kit' }
+  ];
+
+  var activeCat = null;   // category name, when browsing by category
+  var searchQuery = '';   // keyword, when arriving via header search
 
   function getURLParams() {
-    const p = new URLSearchParams(window.location.search);
-    const q = p.get('q');
-    const b = p.get('brand');
-    const c = p.get('cat');
-    const s = p.get('sector');
+    var p = new URLSearchParams(window.location.search);
+    var q = p.get('q');
+    var c = p.get('cat');
     if (q) searchQuery = q.slice(0, 120);
-    if (b) activeFilters.brands.add(b);
-    if (c) activeFilters.cats.add(c);
-    if (s) activeFilters.sectors.add(s);
+    if (c) activeCat = c;
   }
 
-  function buildFilters() {
-    const bWrap = document.getElementById('brandFilters');
-    const cWrap = document.getElementById('catFilters');
-    const sWrap = document.getElementById('sectorFilters');
+  function countCat(name) {
+    return PRODUCTS.filter(function(p){ return p.category === name; }).length;
+  }
 
-    const SECTORS = ['Industrial Compressors','Tunneling','Mining','Construction Equipment','EOT Cranes'];
-
-    bWrap.innerHTML = BRANDS.map(b => `
-      <label class="filter-option">
-        <input type="checkbox" data-type="brand" value="${sanitize(b)}" ${activeFilters.brands.has(b) ? 'checked' : ''}>
-        ${sanitize(b)}
-      </label>`).join('');
-
-    cWrap.innerHTML = CATEGORIES.map(c => `
-      <label class="filter-option">
-        <input type="checkbox" data-type="cat" value="${sanitize(c)}" ${activeFilters.cats.has(c) ? 'checked' : ''}>
-        ${sanitize(c)}
-      </label>`).join('');
-
-    sWrap.innerHTML = SECTORS.map(s => `
-      <label class="filter-option">
-        <input type="checkbox" data-type="sector" value="${sanitize(s)}" ${activeFilters.sectors.has(s) ? 'checked' : ''}>
-        ${sanitize(s)}
-      </label>`).join('');
-
-    document.querySelectorAll('.filter-option input').forEach(chk => {
-      chk.addEventListener('change', () => {
-        if (chk.dataset.type === 'brand') {
-          chk.checked ? activeFilters.brands.add(chk.value) : activeFilters.brands.delete(chk.value);
-        } else if (chk.dataset.type === 'cat') {
-          chk.checked ? activeFilters.cats.add(chk.value) : activeFilters.cats.delete(chk.value);
-        } else if (chk.dataset.type === 'sector') {
-          chk.checked ? activeFilters.sectors.add(chk.value) : activeFilters.sectors.delete(chk.value);
-        }
-        renderProducts();
-      });
+  // ── Render category grid ──
+  function renderCategories() {
+    var grid = document.getElementById('catGrid');
+    var html = '';
+    ALL_CATS.forEach(function(c) {
+      var count = countCat(c.name);
+      var svg = (typeof getProductSVG === 'function') ? getProductSVG(c.imgType) : '';
+      html += '<div class="cat-card-wb" onclick="showProducts(\'' + c.name.replace(/'/g,"\\'") + '\')">' +
+        '<div class="cat-card-img"><div class="cat-svg">' + svg + '</div></div>' +
+        '<div class="cat-card-info">' +
+          '<h4>' + sanitize(c.name) + '</h4>' +
+          '<span class="cat-count">' + (count > 0 ? (count + ' Product' + (count !== 1 ? 's' : '')) : 'Coming soon') + '</span>' +
+          '<span class="view-btn">View Products →</span>' +
+        '</div>' +
+      '</div>';
     });
+    grid.innerHTML = html;
   }
 
-  function clearFilters() {
-    activeFilters.brands.clear();
-    activeFilters.cats.clear();
-    activeFilters.sectors.clear();
+  // ── Show products view (by category or by search) ──
+  function showProducts(catName) {
+    if (catName) activeCat = catName;
+    document.getElementById('categoryView').style.display = 'none';
+    document.getElementById('productView').style.display  = 'block';
+    document.getElementById('pvTitle').innerHTML = activeCat
+      ? sanitize(activeCat) + ' <span>Parts</span>'
+      : 'Search Results <span>for "' + sanitize(searchQuery) + '"</span>';
+    renderProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Back to categories ──
+  function showCategories() {
+    activeCat = null;
     searchQuery = '';
     if (document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
-    buildFilters();
-    renderProducts();
+    document.getElementById('productView').style.display  = 'none';
+    document.getElementById('categoryView').style.display = 'block';
+    renderCategories();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function getFiltered() {
-    let list = [...PRODUCTS];
-    const q = searchQuery.toLowerCase();
-    if (q) list = list.filter(p =>
-      p.name.toLowerCase().includes(q) ||
-      p.partNo.toLowerCase().includes(q) ||
-      p.brand.toLowerCase().includes(q) ||
-      p.category.toLowerCase().includes(q)
-    );
-    if (activeFilters.brands.size) list = list.filter(p => activeFilters.brands.has(p.brand));
-    if (activeFilters.cats.size) list = list.filter(p => activeFilters.cats.has(p.category));
-    if (activeFilters.sectors.size) list = list.filter(p => activeFilters.sectors.has(p.sector));
-    return list;
-  }
-
-  function getSorted(list) {
-    const s = document.getElementById('sortSelect').value;
-    if (s === 'az') return [...list].sort((a,b) => a.name.localeCompare(b.name));
-    if (s === 'za') return [...list].sort((a,b) => b.name.localeCompare(a.name));
-    if (s === 'brand') return [...list].sort((a,b) => a.brand.localeCompare(b.brand));
+    var list = PRODUCTS;
+    if (searchQuery) {
+      var q = searchQuery.toLowerCase();
+      list = list.filter(function(p){
+        return p.name.toLowerCase().indexOf(q) !== -1 ||
+               p.partNo.toLowerCase().indexOf(q) !== -1 ||
+               p.brand.toLowerCase().indexOf(q) !== -1 ||
+               p.category.toLowerCase().indexOf(q) !== -1;
+      });
+    } else if (activeCat) {
+      list = list.filter(function(p){ return p.category === activeCat; });
+    }
     return list;
   }
 
   function renderProducts() {
-    const filtered = getSorted(getFiltered());
-    const grid = document.getElementById('productsGrid');
-    const noRes = document.getElementById('noResults');
-    document.getElementById('productsCount').textContent = filtered.length + ' product' + (filtered.length !== 1 ? 's' : '') + ' found';
-    if (filtered.length === 0) {
+    var s = document.getElementById('sortSelect').value;
+    var list = getFiltered();
+    if (s === 'az')    list = list.slice().sort(function(a,b){ return a.name.localeCompare(b.name); });
+    if (s === 'za')    list = list.slice().sort(function(a,b){ return b.name.localeCompare(a.name); });
+    if (s === 'brand') list = list.slice().sort(function(a,b){ return a.brand.localeCompare(b.brand); });
+
+    var grid  = document.getElementById('productsGrid');
+    var noRes = document.getElementById('noResults');
+    document.getElementById('pvCount').textContent = list.length + ' product' + (list.length !== 1 ? 's' : '') + ' found';
+
+    if (list.length === 0) {
       grid.innerHTML = '';
       noRes.style.display = 'block';
     } else {
       noRes.style.display = 'none';
-      grid.innerHTML = filtered.map(productCardHTML).join('');
+      grid.innerHTML = list.map(productCardHTML).join('');
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    getURLParams();
-    if (searchQuery && document.getElementById('searchInput')) {
-      document.getElementById('searchInput').value = searchQuery;
-    }
-    document.getElementById('sortSelect').addEventListener('change', renderProducts);
-  });
+  document.getElementById('sortSelect').addEventListener('change', renderProducts);
 
   // Wait for Google Sheets data
   onProductsReady(function() {
     getURLParams();
-    buildFilters();
-    renderProducts();
+    renderCategories();
+    if (searchQuery || activeCat) {
+      if (searchQuery && document.getElementById('searchInput')) {
+        document.getElementById('searchInput').value = searchQuery;
+      }
+      showProducts(activeCat);
+    }
   });
 </script>
 </body>

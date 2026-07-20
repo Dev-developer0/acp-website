@@ -4,10 +4,18 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://docs.google.com https://*.googleusercontent.com; frame-ancestors 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://drive.google.com https://*.googleusercontent.com; connect-src 'self' https://docs.google.com https://*.googleusercontent.com; frame-ancestors 'none';">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Tunneling, Mining & Construction — A.C.P</title>
+<link rel="canonical" href="https://www.acpindustrial.com/tunneling-mining-construction.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Tunneling, Mining & Construction — A.C.P">
+<meta property="og:description" content="Underground mining, tunneling and construction equipment spare parts — engine, hydraulic, axle and drifter parts. Shipped worldwide.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.acpindustrial.com/tunneling-mining-construction.html">
+<meta property="og:image" content="https://www.acpindustrial.com/image/ACP.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="Underground mining equipment spare parts, tunneling parts, construction equipment parts — LHD, LPDT, Drill Jumbo, engine parts, hydraulic parts, drifter parts. Shipped worldwide.">
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -106,18 +114,35 @@
     background:var(--ink);color:white;
     border-radius:10px;overflow:hidden;
     border:1px solid rgba(255,255,255,0.06);
-    transition:transform 0.15s,border-color 0.15s;
+    transition:transform 0.15s,border-color 0.15s,box-shadow 0.15s;
     cursor:pointer;
   }
-  .equip-card:hover { transform:translateY(-3px);border-color:#E8A33D; }
+  .equip-card:hover { transform:translateY(-3px);border-color:#E8A33D;box-shadow:0 10px 24px rgba(0,0,0,0.35); }
   .equip-card-img {
-    height:130px;background:linear-gradient(135deg,#1a2a1a,#0d1a0d);
+    height:148px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(232,163,61,0.16) 0%, transparent 55%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px),
+      linear-gradient(135deg,#1a2a1a,#0d1a0d);
     display:flex;align-items:center;justify-content:center;
-    color:#E8A33D;font-size:40px;
+    color:#E8A33D;
+  }
+  .equip-card-img svg { width:52px;height:52px;position:relative;z-index:1; }
+  .equip-card-tag {
+    position:absolute;top:10px;left:10px;z-index:1;
+    background:rgba(232,163,61,0.16);border:1px solid rgba(232,163,61,0.4);
+    color:#E8A33D;font-size:10px;font-weight:700;letter-spacing:0.06em;
+    text-transform:uppercase;padding:3px 8px;border-radius:3px;
   }
   .equip-card-body { padding:14px; }
   .equip-card-body h4 { font-size:14px;font-weight:700;margin-bottom:5px;color:white; }
-  .equip-card-body p { font-size:12px;color:#888;margin:0; }
+  .equip-card-body p { font-size:12px;color:#888;margin:0 0 10px; }
+  .equip-card-link {
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:12px;font-weight:700;color:#E8A33D;
+    text-decoration:none;
+  }
+  .equip-card:hover .equip-card-link { text-decoration:underline; }
 
   /* ---- BRANDS PARTNERS ---- */
   .partners-section {
@@ -265,32 +290,70 @@
 <section style="background:var(--ink);padding:36px 0 28px;">
   <div class="wrap">
     <div class="equip-grid" id="equipGrid">
-      <div class="equip-card" data-equip="lhd">
-        <div class="equip-card-img">🚜</div>
+      <div class="equip-card" data-equip="lhd" onclick="document.querySelector('.etab[data-equip=lhd]').click(); document.getElementById('products').scrollIntoView({behavior:'smooth'});">
+        <div class="equip-card-img">
+          <span class="equip-card-tag">LHD</span>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="28" width="26" height="14" rx="2"/>
+            <path d="M32 32h14l8 8v2h-4"/>
+            <circle cx="16" cy="46" r="6"/>
+            <circle cx="42" cy="46" r="6"/>
+            <path d="M6 28V18a2 2 0 012-2h10l4 12"/>
+          </svg>
+        </div>
         <div class="equip-card-body">
           <h4>Load Haul Dumpers</h4>
           <p>LH307, LH410, EJC30SX and more — engine, hydraulic, axle parts</p>
+          <a class="equip-card-link" href="#products">View Parts →</a>
         </div>
       </div>
-      <div class="equip-card" data-equip="lpdt">
-        <div class="equip-card-img">🚛</div>
+      <div class="equip-card" data-equip="lpdt" onclick="document.querySelector('.etab[data-equip=lpdt]').click(); document.getElementById('products').scrollIntoView({behavior:'smooth'});">
+        <div class="equip-card-img">
+          <span class="equip-card-tag">LPDT</span>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 24h20l6 8h14a4 4 0 014 4v6H8V24z"/>
+            <path d="M8 24l-2 8"/>
+            <circle cx="18" cy="46" r="6"/>
+            <circle cx="44" cy="46" r="6"/>
+          </svg>
+        </div>
         <div class="equip-card-body">
           <h4>Low Profile Dump Trucks</h4>
           <p>LPDT dump box, frame parts, transmission and engine spares</p>
+          <a class="equip-card-link" href="#products">View Parts →</a>
         </div>
       </div>
-      <div class="equip-card" data-equip="drill">
-        <div class="equip-card-img">⚙️</div>
+      <div class="equip-card" data-equip="drill" onclick="document.querySelector('.etab[data-equip=drill]').click(); document.getElementById('products').scrollIntoView({behavior:'smooth'});">
+        <div class="equip-card-img">
+          <span class="equip-card-tag">Drills</span>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="26" width="30" height="10" rx="2"/>
+            <path d="M36 28l16 3v4l-16 3"/>
+            <path d="M52 31h6"/>
+            <path d="M14 26v-6M22 26v-6"/>
+          </svg>
+        </div>
         <div class="equip-card-body">
           <h4>Mining Drills & Jumbos</h4>
           <p>Drifter parts HLX5, HL560, HL510, HL710 — feed, boom, rod parts</p>
+          <a class="equip-card-link" href="#products">View Parts →</a>
         </div>
       </div>
-      <div class="equip-card" data-equip="loader">
-        <div class="equip-card-img">🏗️</div>
+      <div class="equip-card" data-equip="loader" onclick="document.querySelector('.etab[data-equip=loader]').click(); document.getElementById('products').scrollIntoView({behavior:'smooth'});">
+        <div class="equip-card-img">
+          <span class="equip-card-tag">Loaders</span>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 46V26l10-6h8v14"/>
+            <path d="M28 34h16l6 6v6"/>
+            <path d="M10 26l-6 4v10h6"/>
+            <circle cx="20" cy="48" r="5"/>
+            <circle cx="42" cy="48" r="5"/>
+          </svg>
+        </div>
         <div class="equip-card-body">
           <h4>Mining Loaders</h4>
           <p>Hydraulic pumps, axle parts, bucket blades and structural parts</p>
+          <a class="equip-card-link" href="#products">View Parts →</a>
         </div>
       </div>
     </div>
@@ -407,27 +470,35 @@
       <a href="products.html">View All Products →</a>
     </div>
 
-    <!-- Sub-sector filter tabs -->
-    <div class="sub-tabs">
-      <button class="stab active" data-sector="all">All Parts</button>
-      <button class="stab" data-sector="Tunneling">Tunneling</button>
-      <button class="stab" data-sector="Mining">Mining</button>
-      <button class="stab" data-sector="Construction Equipment">Construction</button>
+    <!-- CATEGORY VIEW — shows on page load -->
+    <div id="categoryView">
+      <div class="product-grid cat-grid-wb" id="catGrid"></div>
     </div>
 
-    <div class="page-toolbar">
-      <span class="page-count" id="pageCount"></span>
-      <select class="sort-select" id="sortSelect">
-        <option value="default">Sort: Default</option>
-        <option value="az">Name: A–Z</option>
-        <option value="sector">Sort by Sector</option>
-      </select>
-    </div>
-
-    <div class="product-grid" id="productsGrid"></div>
-    <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--muted);">
-      <h3>No products found</h3>
-      <p><button onclick="resetFilters()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:inherit;font-weight:600;">Show all parts</button></p>
+    <!-- PRODUCT VIEW — shows after clicking a category -->
+    <div id="productView">
+      <div class="pv-topbar">
+        <div class="pv-left">
+          <button class="back-btn" onclick="showCategories()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to Categories
+          </button>
+          <div>
+            <div class="pv-title" id="pvTitle"></div>
+            <div class="pv-count" id="pvCount"></div>
+          </div>
+        </div>
+        <select class="sort-select" id="sortSelect">
+          <option value="default">Sort: Default</option>
+          <option value="az">Name: A–Z</option>
+          <option value="sector">Sort by Sector</option>
+        </select>
+      </div>
+      <div class="product-grid" id="productsGrid"></div>
+      <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--muted);">
+        <h3>No products found</h3>
+        <button onclick="showCategories()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:15px;font-weight:600;margin-top:10px;">← Back to Categories</button>
+      </div>
     </div>
   </div>
 </section>
@@ -489,43 +560,76 @@
 <script src="main.js"></script>
 <script>
   const TMC_SECTORS = ['Tunneling', 'Mining', 'Construction Equipment'];
-  let activeTab = 'all';
 
-  function getProducts() {
-    let list = PRODUCTS.filter(p => TMC_SECTORS.includes(p.sector));
-    if (activeTab !== 'all') list = list.filter(p => p.sector === activeTab);
+  // Categories relevant to this sector — matches the "category (copy exactly)"
+  // list in SHEET-SETUP.md.
+  const TMC_CATS = [
+    { name: 'Engine Parts',        imgType: 'kit' },
+    { name: 'Hydraulic Parts',     imgType: 'valve' },
+    { name: 'Axle & Transmission', imgType: 'bearing' },
+    { name: 'Drifter Parts',       imgType: 'drill' },
+    { name: 'Mining Accessories',  imgType: 'kit' }
+  ];
+
+  let activeCat = null;
+
+  function getBase() {
+    return PRODUCTS.filter(p => TMC_SECTORS.includes(p.sector));
+  }
+
+  function countCat(c) {
+    return getBase().filter(p => p.category === c.name).length;
+  }
+
+  function renderCategories() {
+    const grid = document.getElementById('catGrid');
+    grid.innerHTML = TMC_CATS.map(c => {
+      const count = countCat(c);
+      const svg = (typeof getProductSVG === 'function') ? getProductSVG(c.imgType) : '';
+      return '<div class="cat-card-wb" onclick="showProducts(\'' + c.name.replace(/'/g,"\\'") + '\')">' +
+        '<div class="cat-card-img"><div class="cat-svg">' + svg + '</div></div>' +
+        '<div class="cat-card-info">' +
+          '<h4>' + c.name + '</h4>' +
+          '<span class="cat-count">' + (count > 0 ? (count + ' Product' + (count !== 1 ? 's' : '')) : 'Coming soon') + '</span>' +
+          '<span class="view-btn">View Products →</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function showProducts(catName) {
+    activeCat = catName;
+    document.getElementById('pvTitle').innerHTML = catName + ' <span>Parts</span>';
+    document.getElementById('categoryView').style.display = 'none';
+    document.getElementById('productView').style.display  = 'block';
+    renderProducts();
+    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function showCategories() {
+    activeCat = null;
+    document.getElementById('productView').style.display  = 'none';
+    document.getElementById('categoryView').style.display = 'block';
+    renderCategories();
+    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function renderProducts() {
+    let list = getBase().filter(p => p.category === activeCat);
     const s = document.getElementById('sortSelect').value;
     if (s === 'az')     list = [...list].sort((a,b) => a.name.localeCompare(b.name));
     if (s === 'sector') list = [...list].sort((a,b) => a.sector.localeCompare(b.sector));
-    return list;
-  }
 
-  function render() {
-    const list = getProducts();
     const grid = document.getElementById('productsGrid');
     const noRes = document.getElementById('noResults');
-    document.getElementById('pageCount').textContent =
+    document.getElementById('pvCount').textContent =
       list.length + ' part' + (list.length !== 1 ? 's' : '') + ' found';
     if (list.length === 0) { grid.innerHTML = ''; noRes.style.display = 'block'; }
     else { noRes.style.display = 'none'; grid.innerHTML = list.map(productCardHTML).join(''); }
   }
 
-  function resetFilters() {
-    activeTab = 'all';
-    document.querySelectorAll('.stab').forEach(b => b.classList.toggle('active', b.dataset.sector === 'all'));
-    render();
-  }
-
   onProductsReady(function() {
-    // Sub-sector tabs
-    document.querySelectorAll('.stab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeTab = btn.dataset.sector;
-        document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        render();
-      });
-    });
+    renderCategories();
 
     // Equipment type tabs (just for visual highlight, not filtering products since cards are descriptive)
     document.querySelectorAll('.etab').forEach(btn => {
@@ -540,8 +644,7 @@
       });
     });
 
-    document.getElementById('sortSelect').addEventListener('change', render);
-    render();
+    document.getElementById('sortSelect').addEventListener('change', renderProducts);
   });
 </script>
 </body>

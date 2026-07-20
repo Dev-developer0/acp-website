@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Product details from A.C.P Air Compressor Products.">
+<title>Product Details — A.C.P</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="utility-bar"><div class="wrap"><span class="util-left">Shipping Worldwide — Dispatch within 24 hrs</span><div class="util-right"><a href="tel:+918881780590">+91 88817 80590</a><a href="mailto:air_compressorproducts@yahoo.com">air_compressorproducts@yahoo.com</a></div></div></div>
+<header class="main-header"><div class="header-inner wrap">
+  <a href="index.html" class="logo-block"><img src="image/ACP.png" alt="ACP — Air Compressor Products" class="logo-img"></a>
+  <div class="search-bar"><input type="text" id="searchInput" placeholder="Enter Keyword or Part Number" maxlength="120" autocomplete="off"><button id="searchBtn" aria-label="Search">⌕</button></div>
+  <div class="header-call"><span>Call Us</span><strong>+91 88817 80590</strong></div>
+  <a href="cart.html" class="cart-btn">Cart <span class="cart-count" style="display:none;">0</span></a>
+</div></header>
+<nav class="main-nav"><div class="nav-inner wrap"><div id="navLinks" class="nav-links"><a href="index.html">Home</a><a href="compressors.html">Industrial Compressors</a><a href="tunneling-mining-construction.html">Tunneling, Mining &amp; Construction</a><a href="eot-cranes.html">EOT Cranes</a><a href="products.html">All Products</a><a href="contact.html">Contact Us</a></div><button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button></div></nav>
+<div class="page-title-bar"><div class="wrap"><h1 id="pageTitle">Product Details</h1><div class="breadcrumb"><a href="index.html">Home</a> / <a href="products.html">Products</a> / <span id="breadcrumbProduct">Product</span></div></div></div>
+<main class="wrap product-detail-page" id="productDetail" aria-live="polite"><p class="detail-loading">Loading product details…</p></main>
+<footer><div class="wrap"><div class="foot-grid"><div class="foot-about"><img src="image/ACP.png" alt="ACP Logo" style="height:44px;width:auto;object-fit:contain;margin-bottom:10px;filter:brightness(0) invert(1);"><p class="foot-tagline">Sales, Service &amp; Spare Parts — shipped worldwide.</p></div><div class="foot-col"><h4>Quick Links</h4><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart</a><a href="contact.html">Contact</a></div><div class="foot-col"><h4>Contact</h4><p>+91 88817 80590</p><p>air_compressorproducts@yahoo.com</p><p>Rampur, U.P. 244901</p></div></div><div class="foot-bottom"><span>© <span id="year"></span> Air Compressor Products. All rights reserved.</span></div></div></footer>
+<div id="toast"></div>
+<script src="products-data.js"></script>
+<script src="main.js"></script>
+<script>
+'use strict';
+(function () {
+  function productImage(product) {
+    if (product.img) return '<img src="' + product.img + '" alt="' + sanitize(product.name) + '" class="detail-real-photo" onerror="this.style.display=\'none\'">';
+    return '<div class="detail-svg">' + getProductSVG(product.imgType || 'kit') + '</div>';
+  }
+  function renderProduct() {
+    var id = new URLSearchParams(window.location.search).get('id');
+    var product = PRODUCTS.filter(function (item) { return item.id === id; })[0];
+    var root = document.getElementById('productDetail');
+    if (!product) {
+      document.title = 'Product Not Found — A.C.P';
+      root.innerHTML = '<section class="product-not-found"><h2>Product not found</h2><p>This item may have been removed or the link is incomplete.</p><a class="btn btn-red" href="products.html">Browse Products</a></section>';
+      return;
+    }
+    var wa = encodeURIComponent('Hello A.C.P,\n\nI am interested in:\nProduct: ' + product.name + '\nPart No: ' + product.partNo + '\nBrand: ' + product.brand + '\n\nPlease share availability and pricing.');
+    var subject = encodeURIComponent('Product Inquiry: ' + product.name + ' (' + product.partNo + ')');
+    document.title = product.name + ' — A.C.P';
+    document.getElementById('pageTitle').textContent = product.name;
+    document.getElementById('breadcrumbProduct').textContent = product.name;
+    root.innerHTML = '<div class="product-detail-layout">' +
+      '<section class="detail-gallery"><div class="detail-image">' + productImage(product) + '</div></section>' +
+      '<section class="detail-content"><p class="detail-category">' + sanitize(product.category || 'Spare Part') + '</p><h2>' + sanitize(product.name) + '</h2><p class="detail-part-no">Part No: <strong>' + sanitize(product.partNo || '—') + '</strong></p>' +
+      '<p class="detail-description">' + sanitize(product.desc || 'Genuine replacement part supplied by A.C.P. Contact us for availability, pricing and dispatch details.') + '</p>' +
+      '<div class="detail-specs"><div><span>Brand</span><strong>' + sanitize(product.brand || '—') + '</strong></div><div><span>Category</span><strong>' + sanitize(product.category || '—') + '</strong></div><div><span>Sector</span><strong>' + sanitize(product.sector || '—') + '</strong></div><div><span>Availability</span><strong>Ready Stock / On Request</strong></div></div>' +
+      '<div class="detail-actions"><a class="btn btn-red" href="https://wa.me/918881780590?text=' + wa + '" target="_blank" rel="noopener noreferrer">WhatsApp for Price</a><a class="btn btn-outline-detail" href="mailto:air_compressorproducts@yahoo.com?subject=' + subject + '">Email Inquiry</a><button class="detail-cart" onclick="handleAddCart(\'' + String(product.id).replace(/'/g, "\\'") + '\', this)">Add to Cart</button></div>' +
+      '</section></div><a class="detail-back" href="products.html">← Back to all products</a>';
+  }
+  onProductsReady(renderProduct);
+}());
+</script>
+</body>
+</html>
