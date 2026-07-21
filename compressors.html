@@ -49,42 +49,15 @@
 .stat .lbl { font-size:11px; color:#dfe8f2; text-transform:uppercase; letter-spacing:0.07em; }
 
 /* ---- BRAND FILTER ---- */
-.brand-filter-row {
-  background: white;
-  border-bottom: 2px solid #e0e0e0;
-  padding: 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-}
-.brand-filter-row .wrap {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  align-items: center;
-}
-.bf-btn {
-  padding: 13px 18px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #666;
-  background: none;
-  border: none;
-  border-bottom: 3px solid transparent;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: color .15s, border-color .15s;
-  font-family: 'IBM Plex Sans', sans-serif;
-}
-.bf-btn:hover  { color: #111; }
-.bf-btn.active { color: #009D9A; border-bottom-color: #009D9A; }
-
 /* ---- CATEGORY VIEW ---- */
-#categoryView { padding: 36px 0 44px; }
+#categoryView { padding: 0 0 56px; }
 .cat-page-title {
   text-align: center;
   font-size: 22px;
   font-weight: 800;
   color: #111;
-  margin-bottom: 28px;
+  padding-top: 42px;
+  margin-bottom: 36px;
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
@@ -224,12 +197,14 @@
 .pv-count { font-size: 13px; color: #888; }
 
 /* ---- WHY ACP ---- */
-.why-section { background: #f5f6f7; border-top: 1px solid #e0e0e0; padding: 40px 0; }
-.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-.why-card { background: white; border: 1px solid #e0e0e0; border-radius: 10px; padding: 22px; }
-.why-card .why-icon { color: #009D9A; margin-bottom: 10px; }
-.why-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; margin-top: 0; }
-.why-card p  { font-size: 13.5px; color: #666; margin: 0; }
+.why-section { background: #f7fbfb; border-top: 1px solid #dceceb; padding: 52px 0; }
+.why-section .section-header { border-bottom: 0; justify-content: center; margin-bottom: 26px !important; }
+.why-section .why-grid { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 18px; }
+.why-section .why-card { display: flex; align-items: flex-start; gap: 14px; background: white; border: 1px solid #dceceb; border-radius: 12px; padding: 22px 20px; box-shadow: 0 10px 24px rgba(7,17,31,.05); }
+.why-section .why-icon { width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center; color: #009D9A; background: #e4f5f3; border-radius: 10px; }
+.why-section .why-card h4 { font-size: 15px; font-weight: 700; margin: 1px 0 6px; }
+.why-section .why-card p  { font-size: 13.5px; color: #64748b; line-height: 1.55; margin: 0; }
+.compressor-footer-logo { width: 132px !important; height: 64px !important; object-fit: cover !important; object-position: center 58% !important; margin: 0 0 14px !important; padding: 0 !important; border-radius: 7px; filter: none !important; }
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 1024px) {
@@ -293,22 +268,11 @@
   </div>
 </nav>
 <!-- BRAND FILTER -->
-<div class="brand-filter-row">
-  <div class="wrap">
-    <button class="bf-btn active" data-brand="all">All Brands</button>
-    <button class="bf-btn" data-brand="Atlas Copco">Atlas Copco</button>
-    <button class="bf-btn" data-brand="Ingersoll Rand">Ingersoll Rand</button>
-    <button class="bf-btn" data-brand="ELGi">ELGi</button>
-    <button class="bf-btn" data-brand="Kaeser">Kaeser</button>
-    <button class="bf-btn" data-brand="Chicago Pneumatic">Chicago Pneumatic</button>
-    <button class="bf-btn" data-brand="Generic OEM">Generic OEM</button>
-  </div>
-</div>
-
 <!-- CATEGORY VIEW — shows on page load -->
-<div id="categoryView">
+<div id="categoryView" style="padding-top:36px;">
+  <div aria-hidden="true" style="height:40px;"></div>
   <div class="wrap">
-    <div class="cat-page-title">Select a Category</div>
+    <div class="cat-page-title">Select a <span>Category</span></div>
     <div class="product-grid cat-grid-wb" id="catGrid"></div>
   </div>
 </div>
@@ -370,7 +334,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-about">
-        <img src="image/ACP.png" alt="ACP Logo" style="height:44px;width:auto;object-fit:contain;margin-bottom:10px;filter:brightness(0) invert(1);">
+        <img src="image/ACP.png" alt="ACP Logo" class="compressor-footer-logo">
         <p class="foot-tagline">Sales, Service & Spare Parts — shipped worldwide.</p>
       </div>
       <div class="foot-col"><h4>Sectors</h4><a href="compressors.html">Industrial Compressors</a><a href="tunneling-mining-construction.html">Tunneling, Mining & Construction</a><a href="eot-cranes.html">EOT Cranes</a><a href="products.html">All Products</a></div>
@@ -417,14 +381,11 @@ var COMP_CATS = [
   { name:'Vent Valve',                cat:'Valves',               nameFilter:'',            imgType:'valve',      img:'image/Compressors Category/Vent Valve.jpeg' },
 ];
 
-var activeBrand = 'all';
 var activeCat   = null;
 var activeFilter = null;
 
 function getBase() {
-  var list = PRODUCTS.filter(function(p){ return p.sector === 'Industrial Compressors'; });
-  if (activeBrand !== 'all') list = list.filter(function(p){ return p.brand === activeBrand; });
-  return list;
+  return PRODUCTS.filter(function(p){ return p.sector === 'Industrial Compressors'; });
 }
 
 function countCat(c) {
@@ -463,7 +424,7 @@ function renderCategories() {
       '</div>' +
     '</div>';
   });
-  grid.innerHTML = html || '<p style="color:var(--muted);padding:40px 0;">No products available for this brand.</p>';
+  grid.innerHTML = html || '<p style="color:var(--muted);padding:40px 0;">No products available yet.</p>';
 }
 
 // ── Show products view ──
@@ -515,19 +476,6 @@ function renderProducts() {
 }
 
 // ── Brand tab click ──
-document.querySelectorAll('.bf-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    activeBrand = btn.getAttribute('data-brand');
-    document.querySelectorAll('.bf-btn').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-    if (document.getElementById('productView').style.display === 'block') {
-      renderProducts();
-    } else {
-      renderCategories();
-    }
-  });
-});
-
 // ── Init ──
 document.addEventListener('DOMContentLoaded', function() {
   renderCategories();

@@ -273,6 +273,10 @@ nav.main-nav {
 .section-header h2 { font-size: 20px; font-weight: 700; }
 .section-header h2 span { color: var(--teal); }
 .section-header a { font-size: 13px; color: var(--teal); font-weight: 600; }
+
+.hero-wb { border-bottom: 0; }
+.featured-products-section { padding: 32px 0 44px; }
+.featured-products-section .section-header { border-bottom: 0; }
 .section-header a:hover { text-decoration: underline; }
 
 /* ---- PRODUCT CARDS ---- */
@@ -856,6 +860,7 @@ footer {
 @media (max-width: 480px) {
   .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .trust-card { padding: 18px; }
+  .featured-products-section { padding-top: 28px; }
 }
 
 /* ---- PRODUCT IMAGE / ILLUSTRATION ---- */
@@ -903,7 +908,7 @@ footer {
    ============================================= */
 .hero-wb {
   background: #ffffff;
-  border-bottom: 3px solid var(--border);
+  border-bottom: 0;
   padding: 0;
   overflow: hidden;
 }
@@ -1343,8 +1348,9 @@ footer {
   font-size: 22px;
   font-weight: 800;
   color: #111;
-  margin-bottom: 28px;
+  margin-bottom: 36px;
 }
+.cat-page-title span { color: var(--teal); }
 .cat-grid-wb {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
